@@ -1,0 +1,19 @@
+{
+	"navigation": "Navigation",
+	"theme": "Theme",
+	"language": "Language",
+	"social": "Social",
+	"home": "Home",
+	"works": "Works",
+	"posts": "Posts",
+	"about": "About",
+	"light": "Light",
+	"dark": "Dark",
+	"menu": "Menu",
+	"work": "Work",
+	"post": "Post",
+	"get_in_touch": "Get in touch",
+	"scroll_down": "Scroll down",
+	"recent_work": "Recent work",
+	"more_work": "More work"
+}

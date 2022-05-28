@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1440 848">
+<g stroke="#056FDA" stroke-opacity=".15" stroke-width="2" clip-path="url(#prefix__a)">
+	<rect width="288" height="228" x="430" y="560" rx="36"/>
+	<rect width="288" height="228" x="822" y="601" rx="34"/>
+	<rect width="288" height="228" x="684" y="517" rx="36"/>
+	<rect width="288" height="228" x="599" y="675" rx="36"/>
+	<rect width="288" height="228" x="39" y="-73" rx="36"/>
+	<rect width="288" height="228" x="-88" y="168" rx="36"/>
+	<rect width="288" height="228" x="126" y="260" rx="36"/>
+	<rect width="288" height="228" x="49" y="356" rx="36"/>
+	<rect width="288" height="228" x="-192" y="498" rx="36"/>
+	<rect width="288" height="228" x="49" y="599" rx="36"/>
+	<rect width="288" height="228" x="271" y="722" rx="36"/>
+	<rect width="288" height="228" x="234" y="526" rx="36"/>
+	<rect width="288" height="228" x="372" y="409" rx="36"/>
+	<rect width="288" height="228" x="-144" y="-9" rx="36"/>
+	<rect width="288" height="228" x="98" y="72" rx="36"/>
+	<rect width="288" height="228" x="227" y="-43" rx="36"/>
+</g>
+<defs>
+	<clipPath id="prefix__a">
+		<rect width="1440" height="848" fill="#fff"/>
+	</clipPath>
+</defs>
+</svg>
