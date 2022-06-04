@@ -5,20 +5,32 @@ import Footer from './footer'
 import Seo from './seo'
 import gsap from 'gsap'
 import Preloader from '../components/preloader'
+import getSocialItems from '../utils/getSocialItems'
+import getLangContent from '../utils/getLangContent'
 
 const Layout = ({ children, pageProps, seo }) => {
-
 	const { location } = pageProps
-
+	const { language } = pageProps.pageContext
 	const data = useStaticQuery(graphql`
 		query siteQuery {
-			site {
-				siteMetadata {
+			allContentfulSiteMetadata {
+				nodes {
 					title
+				}
+			}
+			allContentfulSocialLinks {
+				nodes {
+					socialTitle
+					telegramLink
+					instagramLink
+					githubLink
+					facebookLink
+					node_locale
 				}
 			}
 		}
   	`)
+
 
 	/* theme */
 
@@ -108,8 +120,9 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	}, [location])
 
-	const { title } = data.site.siteMetadata
-
+	const { title } = data.allContentfulSiteMetadata.nodes[0]
+	const langSocial = getLangContent(language, data.allContentfulSocialLinks.nodes);
+	const social = getSocialItems(langSocial);
 	// const [loader, setLoader] = useState(!('isPreloaderShown' in localStorage));
 
 	useEffect(() => {
@@ -125,11 +138,16 @@ const Layout = ({ children, pageProps, seo }) => {
 			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
 			<Seo theme={theme} seo={seo} />
 			{!('isPreloaderShown' in localStorage) ? <Preloader /> : ''}
-			<Header siteTitle={title} onToggleTheme={toggleTheme} theme={theme} />
+			<Header
+				language={language}
+				social={social}
+				siteTitle={title}
+				onToggleTheme={toggleTheme}
+				theme={theme} />
 			<div id="main" className='main grow'>
 				{children}
 			</div>
-			<Footer />
+			<Footer language={language} social={social} />
 		</div>
 	)
 

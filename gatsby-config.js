@@ -5,7 +5,6 @@ require("dotenv").config({
 module.exports = {
 	siteMetadata: {
 		title: `Webofkarma`,
-		siteUrl: `https://www.yourdomain.tld`,
 		author: `Zhenya Petrenko <priestofkarma@gmail.com>`
 	},
 	plugins: [

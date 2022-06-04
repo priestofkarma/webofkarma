@@ -2,91 +2,45 @@ import React, { useRef, useEffect } from "react"
 import { graphql, Link } from 'gatsby'
 import { useIntl } from "gatsby-plugin-intl"
 import Layout from "../components/layout"
-import { socialMenuItems } from '../utils/MenuItems'
 import heroBg from '../images/hero-bg.svg'
 import { BsArrowRightShort, BsArrowDown, BsEye, BsStars } from 'react-icons/bs'
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import FadeInAnimation from '../components/FadeInAnimation'
+import FadeInAnimation from '../components/fadeInAnimation'
+import getSocialItems from '../utils/getSocialItems'
+import LetsWork from '../components/lets-work'
+import SingleWork from '../components/work-component'
 
 const IndexPage = (props) => {
-	gsap.registerPlugin(ScrollToPlugin);
-	gsap.registerPlugin(ScrollTrigger)
-
+	const { language } = props.pageContext
+	const { data } = props
 	const secondBlockRef = useRef()
-	const { data, location } = props
 	const intl = useIntl()
 	const seo = {
 		title: 'Home'
 	}
 
+	const social = getSocialItems(data.allContentfulSocialLinks.nodes[0])
+	const {
+		heroTitle,
+		heroSubtitle,
+		canHelpTitle,
+		canHelpFirstItemTitle,
+		canHelpFirstItemText,
+		canHelpSecondItemTitle,
+		canHelpSecondItemText,
+		canHelpThirdItemTitle,
+		canHelpThirdItemText,
+		imagesGrid
+	} = data.allContentfulHomePage.nodes[0]
+
+	gsap.registerPlugin(ScrollToPlugin);
+	gsap.registerPlugin(ScrollTrigger)
 	function scrollDown() {
 		gsap.to(window, { duration: 1, scrollTo: secondBlockRef.current, ease: 'power4.out' });
 	}
-
-	const { heroTitle, heroSubtitle, canHelpTitle, canHelpItem, imagesGrid } = data.allContentfulHomePage.nodes[0]
-
-	let canHelpItems = []
-	let obj = {}
-	for (let i = 0; i < canHelpItem.length; i++) {
-		const item = canHelpItem[i]
-		if (item.key === 'title') {
-			obj.title = item.value
-		} else if (item.key === 'text') {
-			obj.text = item.value
-			canHelpItems.push(obj)
-			obj = {}
-		}
-	}
-
-	const workRef = useRef()
-
-	useEffect(() => {
-		const workList = workRef.current;
-		const work = workList.querySelectorAll('.work');
-
-		let workImage = '';
-		let workImageBounding = '';
-		let workImageWrap = '';
-
-		if (window.matchMedia('(min-width: 1280px)').matches) {
-			work.forEach(item => {
-				item.addEventListener('mouseenter', workEnter)
-				item.addEventListener('mousemove', workMove)
-				item.addEventListener('mouseleave', workLeave)
-			})
-
-			function workEnter(e) {
-				workImage = e.currentTarget.querySelector('.work-image');
-				workImageBounding = workImage.getBoundingClientRect();
-				workImageWrap = e.currentTarget.querySelector('.work-image-wrap');
-
-				gsap.set(workImage, {
-					left: (e.clientX - (workImageBounding.width / 2)),
-					top: (e.clientY - (workImageBounding.height / 2)),
-				});
-
-				workImage.classList.remove('invisible')
-				workImageWrap.classList.add('shown')
-			}
-
-			function workMove(e) {
-				gsap.to(e.currentTarget.querySelector('.work-image'), 1.5, {
-					left: (e.clientX - (workImageBounding.width / 2)),
-					top: (e.clientY - (workImageBounding.height / 2)),
-					ease: 'Power4.easeOut'
-				});
-			}
-
-			function workLeave(e) {
-				e.currentTarget.querySelector('.work-image').classList.add('invisible')
-				e.currentTarget.querySelector('.work-image-wrap').classList.remove('shown')
-			}
-		}
-
-	}, [location])
 
 	useEffect(() => {
 		const firstGrid = document.querySelector('.last-work-grid');
@@ -129,18 +83,23 @@ const IndexPage = (props) => {
 						<div className='md:w-8/12 lg:w-1/2 xl:w-5/12 xl:max-w-screen-sm 2xl:max-w-screen-md'>
 
 							<Link
-								to='/'
+								to={'/' + language}
 								className="mb-8 group inline-flex items-center leading-none text-sm p-3 -mx-3 pr-4 bg-gray-50/10 hover:bg-gray-100/90 border dark:border-none dark:bg-gray-500/10 dark:hover:bg-gray-200/10 rounded-full backdrop-blur-sm transition-colors duration-500 cursor-pointer">
-								<span className='bg-green-400 py-2 px-2.5 mr-3 text-center shrink-0 inline-block text-black uppercase rounded-full text-xs leading-none'>{intl.formatMessage({ id: "work" })}</span>
+								<span className='bg-green-400 py-2 px-2.5 mr-3 text-center shrink-0 inline-block text-black uppercase rounded-full text-xs leading-none'>
+									{intl.formatMessage({ id: "post" })}
+								</span>
 								<span className='text-ellipsis sm:w-64 sm:whitespace-nowrap overflow-hidden mr-1.5'>Dentalex - Курси для сучасних стоматологів</span>
 								<BsArrowRightShort className='button-icon' />
 							</Link>
 
-							<h1 key='heroTitle' className='text-gradient-animation bg-gradient-to-r from-cobalt-400 to-purple-500 text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl mb-6 xl:mb-8 font-bold'>{heroTitle}</h1>
-							<p className='text-md sm:text-lg lg:text-xl xl:w-9/12 leading-normal text-gray-700 dark:text-zinc-300'>{heroSubtitle.heroSubtitle}</p>
-
+							<h1 key='heroTitle' className='text-gradient-animation bg-gradient-to-r from-cobalt-400 to-purple-500 text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl mb-6 xl:mb-8 font-bold'>
+								{heroTitle}
+							</h1>
+							<div
+								className='text-md sm:text-lg lg:text-xl xl:w-9/12 leading-normal text-gray-700 dark:text-zinc-300'
+								dangerouslySetInnerHTML={{ __html: heroSubtitle.childMarkdownRemark.html }}></div>
 							<Link
-								to='/contact'
+								to={'/' + language + '/contact'}
 								data-strenght={50}
 								data-text-strenght={30}
 								className="group button magnetic mt-12">
@@ -168,25 +127,27 @@ const IndexPage = (props) => {
 								</svg>
 							</div>
 							<div className="h-96 relative">
-								{data.bestWork.nodes.slice(0, 4).map((work, index) => {
-									const ind = index + 1
-									return (
-										<Link
-											to={`/${work.path}`}
-											key={work.id}
-											className={`hero-image block rounded-sm overflow-hidden group ${(ind % 2) ? 'w-36 lg:w-44 xl:w-60' : 'w-60 lg:w-72 xl:w-96'} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
-											<div className="flex items-center justify-center absolute w-full h-full inset-0 z-10 text-white text-3xl bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-												<BsEye className='scale-0 group-hover:scale-100 transition-transform duration-500' />
-											</div>
-											<GatsbyImage
-												image={(ind % 2) ? getImage(work.previewImageMobile) : getImage(work.previewImage)}
-												alt={(ind % 2) ? work.previewImageMobile.title : work.previewImage.title}
-												className='bg-gray-200/20 backdrop-blur-md'
-												imgClassName='object-top'
-											/>
-										</Link>
-									)
-								})}
+								{data.allWork.nodes.filter(work => work.isBestWork === true)
+									.map((work, index) => {
+										const ind = index + 1
+										return (
+											<Link
+												to={`/${language}/${work.path}`}
+												key={work.id}
+												className={`hero-image block group ${(ind % 2) ? 'w-36 lg:w-44 xl:w-60' : 'w-60 lg:w-72 xl:w-96'} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
+												<div data-strenght='100' className='magnetic'>
+													<div className="flex items-center justify-center absolute w-full h-full inset-0 z-10 rounded-sm text-white text-3xl bg-black/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+														<BsEye className='scale-0 group-hover:scale-100 transition-transform duration-500' />
+													</div>
+													<GatsbyImage
+														image={(ind % 2) ? getImage(work.previewImageMobile) : getImage(work.previewImage)}
+														alt={(ind % 2) ? work.previewImageMobile.title : work.previewImage.title}
+														imgClassName='object-top rounded-sm'
+													/>
+												</div>
+											</Link>
+										)
+									})}
 							</div>
 							<div className='md:hidden relative -mb-3'>
 								<button
@@ -201,7 +162,7 @@ const IndexPage = (props) => {
 				</div>
 
 				<div className="absolute right-4 bottom-16 sm:right-10  lg:right-12 lg:bottom-16 flex flex-row md:flex-row xl:flex-col">
-					{socialMenuItems.map((item, index) => (
+					{social.map((item, index) => (
 						<a
 							href={item.url}
 							className='p-1.5 text-2xl 2xl:text-3xl inline-block magnetic hover:text-cobalt-50 hover:bg-cobalt-500 rounded-full transition-colors'
@@ -214,6 +175,7 @@ const IndexPage = (props) => {
 							<span className='magnetic-text block'>{item.icon}</span>
 						</a>
 					))}
+
 				</div>
 			</section>
 
@@ -221,33 +183,56 @@ const IndexPage = (props) => {
 
 			<section
 				ref={secondBlockRef}
-				className='py-12 md:pt-24 xl:pt-32 md:pb-16 bg-gradient-to-b from-slate-100 to-slate-50 dark:from-zinc-800 dark:to-zinc-900'>
+				className='pt-12 md:pt-24 xl:pt-32 md:pb-16 bg-gradient-to-b from-slate-100 to-slate-50 dark:from-zinc-800 dark:to-zinc-900'>
 				<div className="container">
 					<div>
-						<h3 className='text-3xl md:text-5xl mb-10 md:mb-20'>
+						<h2 className='h2 mb-10'>
 							{canHelpTitle}
 							<span className='anim-dot'>.</span>
 							<span className='anim-dot'>.</span>
 							<span className='anim-dot'>.</span>
-						</h3>
+						</h2>
 
 						<ul className='md:flex md:-ml-8 xl:-ml-20'>
-							{canHelpItems.map((item, index) => {
-								return (
-									<FadeInAnimation
-										elem='li'
-										direction='up'
-										delay={index * 0.15}
-										delayFrom={768}
-										key={`canHelpItem-${index}`}
-										className='mb-10 md:pl-8 md:mb-0 xl:pl-20 md:w-1/3'>
-										<div className='text-zinc-400 dark:text-slate-600 text-md hidden md:block'>0{index + 1}</div>
-										<hr className='mt-4 mb-8 md:mb-12 border-zinc-400 dark:border-zinc-600' />
-										<h4 className='text-2xl mb-4 md:mb-8 md:text-3xl xl:text-4xl'>{index === 2 ? <BsStars className='inline mr-2' /> : ''}{item.title}</h4>
-										<p className='text-base xl:text-lg text-slate-700 dark:text-zinc-300'>{item.text}</p>
-									</FadeInAnimation>
-								)
-							})}
+							<FadeInAnimation
+								elem='li'
+								direction='up'
+								delay={0}
+								delayFrom={768}
+								className='can-help-item'>
+								<div className='can-help-num'>01</div>
+								<hr className='can-help-hr' />
+								<h4 className='can-help-title'>{canHelpFirstItemTitle}</h4>
+								<div
+									className='can-help-text'
+									dangerouslySetInnerHTML={{ __html: canHelpFirstItemText.childMarkdownRemark.html }}></div>
+							</FadeInAnimation>
+							<FadeInAnimation
+								elem='li'
+								direction='up'
+								delay={0.15}
+								delayFrom={768}
+								className='can-help-item'>
+								<div className='can-help-num'>02</div>
+								<hr className='can-help-hr' />
+								<h4 className='can-help-title'>{canHelpSecondItemTitle}</h4>
+								<div
+									className='can-help-text'
+									dangerouslySetInnerHTML={{ __html: canHelpSecondItemText.childMarkdownRemark.html }}></div>
+							</FadeInAnimation>
+							<FadeInAnimation
+								elem='li'
+								direction='up'
+								delay={0.3}
+								delayFrom={768}
+								className='can-help-item'>
+								<div className='can-help-num'>03</div>
+								<hr className='can-help-hr' />
+								<h4 className='can-help-title'><BsStars className='inline mr-2' />{canHelpThirdItemTitle}</h4>
+								<div
+									className='can-help-text'
+									dangerouslySetInnerHTML={{ __html: canHelpThirdItemText.childMarkdownRemark.html }}></div>
+							</FadeInAnimation>
 						</ul>
 					</div>
 				</div>
@@ -257,44 +242,18 @@ const IndexPage = (props) => {
 
 			<section className='bg-slate-50 dark:bg-zinc-900'>
 				<div className="container">
-					<div className='py-8 md:py-28 md:pt-20' >
-						<h2 className='text-3xl md:text-5xl mb-8 md:mb-12 xl:mb-20'>{intl.formatMessage({ id: "recent_work" })}</h2>
+					<div className='py-8 pb-16 md:py-16' >
+						<h2 className='h2'>{intl.formatMessage({ id: "recent_work" })}</h2>
 						<ul
-							ref={workRef}
 							className='flex flex-wrap md:-ml-8 xl:-mx-16'>
-							{data.allWork.nodes.map((work, index) => {
-								const services = work.services.join(" & ");
+							{data.allWork.nodes.slice(0, 4).map((work, index) => {
 								return (
-									<li key={work.id} className={`md:w-1/2 xl:w-full md:pl-8 xl:px-16 border-slate-500 dark:border-zinc-500 ${(index > 1) ? 'hidden xl:block' : ''} xl:border-b ${(index === 0) ? 'xl:border-t' : ''}`}>
-										<Link
-											to={`/${work.path}`}
-											className='work group block py-2 pb-12 xl:py-16'>
-											<div
-												className="work-image w-full xl:max-w-xl 2xl:max-w-2xl xl:invisible xl:fixed z-10 xl:pointer-events-none">
-												<GatsbyImage
-													className='work-image-wrap w-full relative transition-all'
-													image={getImage(work.previewImage)}
-													alt={work.previewImage.title}
-												/>
-											</div>
-											<div className='xl:flex items-center justify-between'>
-												<h3
-													style={{ willChange: 'opacity, transform' }}
-													className='inline-block text-2xl md:text-3xl lg:text-4xl xl:text-7xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-8 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
-												<hr className='mt-3 mb-3 md:mb-6 xl:mb-0 xl:hidden border-zinc-400 dark:border-slate-600' />
-												<span
-													style={{ willChange: 'opacity, transform' }}
-													className='inline-block xl:text-lg text-slate-700 dark:text-zinc-400 transition-all group-hover:-skew-x-12 xl:group-hover:-translate-x-8 duration-500 xl:group-hover:opacity-50 translate-z-0'>
-													{services}
-												</span>
-											</div>
-										</Link>
-									</li>
+									<SingleWork key={work.id} work={work} index={index} language={language} />
 								)
 							})}
 						</ul>
 						<div className='flex justify-center pt-2 md:pt-8 xl:pt-20'>
-							<Link to='/work' className='group button-outline magnetic'
+							<Link to={'/' + language + '/work'} className='group button-outline magnetic'
 								data-strenght='50'
 								data-text-strenght='20'>
 								<span className="magnetic-text flex">
@@ -312,36 +271,45 @@ const IndexPage = (props) => {
 			<div className='work-grid hidden sm:block relative py-6 lg:py-16'>
 				<div style={{ width: '120%', marginLeft: '-2%' }}>
 					<div className="flex last-work-grid" style={{ willChange: 'transform' }}>
-						{imagesGrid.map((image, index) => {
+						{imagesGrid.map((item, index) => {
 							return (
-								<div key={image.id} className='p-2 md:p-3 lg:p-4 w-1/3'>
-									<GatsbyImage
-										className='w-full h-full relative transition-all'
-										image={getImage(image.gatsbyImageData)}
-										alt={image.description}
-									/>
+								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3`}>
+									{item.gatsbyImageData ?
+										<GatsbyImage
+											className='item-loading w-full h-full relative transition-all'
+											image={getImage(item.gatsbyImageData)}
+											alt={item.description}
+										/> :
+										<video autoPlay loop muted playsInline
+											className='item-loading w-full h-full relative transition-all'
+											src={item.url}></video>}
 								</div>
 							)
 						})}
 					</div>
 				</div>
 				<div style={{ width: '120%', marginLeft: '-18%' }}>
-					<div className="flex justify-end last-work-grid-second" style={{ willChange: 'transform' }}>
-						{imagesGrid.map((image, index) => {
+					<div className="flex last-work-grid-second" style={{ willChange: 'transform' }}>
+						{imagesGrid.map((item, index) => {
 							return (
-								<div key={image.id} className='p-2 md:p-3 lg:p-4 w-1/3'>
-									<GatsbyImage
-										className='w-full h-full relative transition-all'
-										image={getImage(image.gatsbyImageData)}
-										alt={image.description}
-									/>
+								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3`}>
+									{item.gatsbyImageData ?
+										<GatsbyImage
+											className='item-loading w-full h-full relative transition-all'
+											image={getImage(item.gatsbyImageData)}
+											alt={item.description}
+										/> :
+										<video autoPlay loop muted playsInline
+											className='item-loading w-full h-full relative transition-all'
+											src={item.url}></video>}
 								</div>
 							)
 						})}
 					</div>
 				</div>
-
 			</div>
+
+			<LetsWork />
 
 		</Layout >
 	)
@@ -349,6 +317,14 @@ const IndexPage = (props) => {
 
 export const query = graphql`
 	query indexPageQuery($language: String) {
+		allContentfulSocialLinks(filter: {node_locale: {eq: $language}}) {
+			nodes {
+				telegramLink
+				instagramLink
+				githubLink
+				facebookLink
+			}
+		}
 		allContentfulHomePage(filter: {node_locale: {eq: $language}}) {
 			nodes {
 				id
@@ -356,22 +332,38 @@ export const query = graphql`
 				node_locale
 				heroSubtitle {
 					id
-					heroSubtitle
+					childMarkdownRemark {
+						html
+					}
 				}
 				canHelpTitle
-				canHelpItem {
-					value
-					key
-					id
+				canHelpFirstItemTitle
+				canHelpFirstItemText {
+					childMarkdownRemark {
+						html
+					}
+				}
+				canHelpSecondItemTitle
+				canHelpSecondItemText {
+					childMarkdownRemark {
+						html
+					}
+				}
+				canHelpThirdItemTitle
+				canHelpThirdItemText {
+					childMarkdownRemark {
+						html
+					}
 				}
 				imagesGrid {
 					id
 					gatsbyImageData
 					description
+					url
 				}
 			}
 		}
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } }) {
+		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date}) {
 			totalCount
 			nodes {
 				id
@@ -379,31 +371,21 @@ export const query = graphql`
 				path
 				workName
 				services
+				isBestWork
+				videoPreview {
+					url
+					file {
+						fileName
+						contentType
+					}
+				}
 				previewImage {
-					gatsbyImageData(aspectRatio: 1.5)
+					gatsbyImageData(aspectRatio: 1.6)
 					title
+					url
 				}
 				previewImageMobile {
-					gatsbyImageData(aspectRatio: 0.66)
-					title
-				}
-			}
-		}
-		bestWork: allContentfulSingleWork(
-			filter: { node_locale: { eq: $language }, path: { in: ["ericpapp", "onlycam", "qclinic", "dentalex"] } },
-			sort: {fields: path, order: DESC}) {
-			nodes {
-				id
-				node_locale
-				path
-				workName
-				services
-				previewImage {
-					gatsbyImageData(aspectRatio: 1.5)
-					title
-				}
-				previewImageMobile {
-					gatsbyImageData(aspectRatio: 0.66)
+					gatsbyImageData(aspectRatio: 0.625)
 					title
 				}
 			}

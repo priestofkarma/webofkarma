@@ -1,14 +1,12 @@
 import React, { useLayoutEffect, useState, useRef } from 'react'
-import { Link } from 'gatsby'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import LanguageSwitcher from './languageSwitcher'
 import Logo from './logo'
 import { useIntl } from "gatsby-plugin-intl"
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { socialMenuItems } from '../utils/MenuItems'
 
-
-const Header = ({ siteTitle, onToggleTheme, theme }) => {
+const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 	const intl = useIntl()
 
 	const [isOpen, setMenu] = useState(false);
@@ -16,9 +14,21 @@ const Header = ({ siteTitle, onToggleTheme, theme }) => {
 	const menuOverlayRef = useRef();
 	const menuBtnRef = useRef();
 	const tlRef = useRef();
-
 	gsap.registerPlugin(ScrollTrigger)
 
+	const data = useStaticQuery(graphql`
+		query headerQuery {
+			allContentfulSingleWork {
+				totalCount
+			}
+		}
+  	`)
+
+	/* fix menu-opened when change page */
+	/* menu button */
+	/* if (isOpen) {
+		document.body.classList.remove('menu-opened')
+	} */
 	function toggleMenu() {
 		setMenu(isOpen => !isOpen);
 
@@ -50,6 +60,13 @@ const Header = ({ siteTitle, onToggleTheme, theme }) => {
 		});
 	}, [])
 
+	/* Navigation */
+	const navLinks = [
+		{ href: `/${language}/work`, label: 'work', count: data.allContentfulSingleWork.totalCount / 2 },
+		{ href: `/${language}/posts`, label: 'posts', count: 9 },
+		{ href: `/${language}/library`, label: 'library' },
+		{ href: `/${language}/about`, label: 'about' },
+	];
 
 	return (
 		<header className='header flex items-center absolute z-50 w-full top-0 left-0'>
@@ -74,45 +91,29 @@ const Header = ({ siteTitle, onToggleTheme, theme }) => {
 						<div className=" min-h-full px-8 pt-20 pb-10 sm:px-20 flex flex-col">
 
 							<div className="menu__item mt-auto mb-4">
-								<h5 className='text-zinc-600 text-xs md:text-sm'>{intl.formatMessage({ id: "navigation" })}</h5>
-								<hr className='mt-2 mb-4 border-zinc-700' />
+								<h5 className='text-zinc-400 text-xs md:text-sm'>{intl.formatMessage({ id: "navigation" })}</h5>
+								<hr className='mt-2 mb-4 border-zinc-400' />
 								<nav className='nav header__nav mb-4'>
-									<ul className='text-3xl xl:text-4xl 2xl:text-5xl'>
-										<li className='mb-4 2xl:mb-6'>
-											<Link to='/'
-												data-strength="20"
-												className='magnetic inline-block relative text-cobalt-500 hover:opacity-80 transition-colors'>
-												{intl.formatMessage({ id: "home" })}
-											</Link>
-										</li>
-										<li className='mb-4 2xl:mb-6'>
-											<Link to='gg'
-												data-strength="20"
-												className='magnetic inline-block relative hover:opacity-80 transition-colors'>
-												{intl.formatMessage({ id: "works" })}<sup>8</sup>
-											</Link>
-										</li>
-										<li className='mb-4 2xl:mb-6'>
-											<Link to='gg'
-												data-strength="20"
-												className='magnetic inline-block relative hover:opacity-80 transition-colors'>
-												{intl.formatMessage({ id: "posts" })}<sup>12</sup>
-											</Link>
-										</li>
-										<li className='mb-4 2xl:mb-6'>
-											<Link to='gg'
-												data-strength="20"
-												className='magnetic inline-block relative hover:opacity-80 transition-colors'>
-												{intl.formatMessage({ id: "about" })}
-											</Link>
-										</li>
+									<ul className='text-3xl xl:text-4xl 2xl:text-5xl pt-2 md:pt-6'>
+										{navLinks.map(({ href, label, count }) => {
+											return (
+												<li key={href} className='mb-4 2xl:mb-6'>
+													<Link to={href}
+														data-strength="20"
+														className={`${(window.location.pathname.includes(href)) ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
+														{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
+													</Link>
+												</li>
+											)
+										})}
+
 									</ul>
 								</nav>
 							</div>
 
 							<div className="menu__item mt-auto mb-4">
-								<h5 className='text-zinc-600 text-xs lg:text-sm'>{intl.formatMessage({ id: "theme" })}</h5>
-								<hr className='mt-2 mb-4 border-zinc-700' />
+								<h5 className='text-zinc-400 text-xs lg:text-sm'>{intl.formatMessage({ id: "theme" })}</h5>
+								<hr className='mt-2 mb-4 border-zinc-400' />
 								<div className='flex'>
 									<button
 										data-strength="10"
@@ -130,16 +131,16 @@ const Header = ({ siteTitle, onToggleTheme, theme }) => {
 							</div>
 
 							<div className="menu__item mt-auto mb-4">
-								<h5 className='text-zinc-600 text-xs lg:text-sm'>{intl.formatMessage({ id: "language" })}</h5>
-								<hr className='mt-2 mb-4 border-zinc-700' />
+								<h5 className='text-zinc-400 text-xs lg:text-sm'>{intl.formatMessage({ id: "language" })}</h5>
+								<hr className='mt-2 mb-4 border-zinc-400' />
 								<LanguageSwitcher />
 							</div>
 
 							<div className="menu__item mt-auto mb-4">
-								<h5 className='text-zinc-600 text-xs lg:text-sm'>{intl.formatMessage({ id: "social" })}</h5>
-								<hr className='mt-2 mb-4 border-zinc-700' />
+								<h5 className='text-zinc-400 text-xs lg:text-sm'>{intl.formatMessage({ id: "social" })}</h5>
+								<hr className='mt-2 mb-4 border-zinc-400' />
 								<div className='flex flex-wrap'>
-									{socialMenuItems.map((item, index) => (
+									{social.map((item, index) => (
 										<a
 											href={item.url}
 											className='mr-4 inline-block magnetic hover:text-cobalt-500 transition-colors'

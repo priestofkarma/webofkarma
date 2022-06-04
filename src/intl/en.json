@@ -6,6 +6,7 @@
 	"home": "Home",
 	"works": "Works",
 	"posts": "Posts",
+	"library": "Library",
 	"about": "About",
 	"light": "Light",
 	"dark": "Dark",
@@ -15,5 +16,12 @@
 	"get_in_touch": "Get in touch",
 	"scroll_down": "Scroll down",
 	"recent_work": "Recent work",
-	"more_work": "More work"
+	"more_work": "More work",
+	"usefulness": "Usefulness",
+	"services": "Services",
+	"credits": "Credits",
+	"year": "Year",
+	"contact_lead": "Let’s work together",
+	"location": "Location",
+	"all_rights": "All rights reserved"
 }

@@ -16,7 +16,6 @@ const Language = () => {
 						<button
 							className={`${currentLocale === language ? 'text-cobalt-500 font-medium' : ''} transition-colors magnetic mr-4`}
 							key={language}
-
 							onClick={function () {
 								changeLocale(language);
 								document.body.classList.remove('menu-opened')
