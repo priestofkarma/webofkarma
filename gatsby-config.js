@@ -5,7 +5,8 @@ require("dotenv").config({
 module.exports = {
 	siteMetadata: {
 		title: `Webofkarma`,
-		author: `Zhenya Petrenko <priestofkarma@gmail.com>`
+		author: `Zhenya Petrenko <priestofkarma@gmail.com>`,
+		siteUrl: `https://webofkarmamaster.gtsb.io/`
 	},
 	plugins: [
 		{
