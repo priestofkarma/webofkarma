@@ -16,11 +16,10 @@ const SingleWork = (props) => {
 		workName,
 		services,
 		workDescription,
-		previewImage,
 		credits,
 		location,
 		date,
-		previewImageMobile,
+		liveLink,
 		imacMedia,
 		macbookMedia,
 		ipadMedia,
@@ -103,7 +102,9 @@ const SingleWork = (props) => {
 							{workName && <h1 className='h1 mb-6 md:mb-16 xl:text-8xl'>{workName}</h1>}
 
 							<FadeInAnimation elem='div' direction='scale' distance='0' className='absolute -right-4 bottom-2 md:bottom-28 lg:right-0 lg:bottom-36 z-10'>
-								<a href="#"
+								<a href={liveLink}
+									target='_blank'
+									rel='noreferrer'
 									data-strenght={50}
 									data-text-strenght={30}
 									className="magnetic button p-2 flex items-center justify-center w-32 h-32 lg:w-40 lg:h-40 rounded-full">
@@ -281,19 +282,11 @@ export const query = graphql`
 			credits
 			location
 			date
+			liveLink
 			workDescription {
 				childMarkdownRemark {
 					html
 				}
-			}
-			previewImage {
-				url
-				gatsbyImageData(layout: FULL_WIDTH)
-				title
-			}
-			previewImageMobile {
-				gatsbyImageData(layout: FULL_WIDTH)
-				title
 			}
 			heroImage {
 				url

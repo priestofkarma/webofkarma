@@ -16,7 +16,7 @@ const Seo = ({ theme, seo }) => {
 			}
 		`)
 
-	const { description, lang = typeof window !== `undefined` && localStorage.getItem('gatsby-intl-language') || 'en', meta = [], title } = site.siteMetadata;
+const { description, lang = typeof window !== `undefined` ? localStorage.getItem('gatsby-intl-language') || 'en' : 'en', meta = [], title } = site.siteMetadata;
 
 	const metaDescription = description || site.siteMetadata.description
 

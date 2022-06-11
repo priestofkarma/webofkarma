@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import LanguageSwitcher from './languageSwitcher'
 import Logo from './logo'
