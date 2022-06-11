@@ -1,6 +1,24 @@
-/* import React from 'react';
+import React from 'react';
+import { createElement } from 'react';
 
-export const onRenderBody = ({ setHeadComponents }) => {
+const applyDarkModeClass = `
+	(function() {
+	try {
+		let mode = localStorage.getItem('theme');
+		if (mode === 'dark') {
+			document.body.classList.add('dark');
+		}
+	} catch (e) {}
+	})();
+`;
+
+export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
+	const script = createElement('script', {
+		dangerouslySetInnerHTML: {
+			__html: applyDarkModeClass,
+		},
+	});
+	setPreBodyComponents([script]);
 	setHeadComponents([
 		<link
 			key="mariupol-regular"
@@ -27,4 +45,4 @@ export const onRenderBody = ({ setHeadComponents }) => {
 			crossOrigin="anonymous"
 		/>
 	]);
-}; */
+};

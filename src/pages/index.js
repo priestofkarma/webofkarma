@@ -68,7 +68,6 @@ const IndexPage = (props) => {
 		});
 	}, [])
 
-
 	return (
 		<Layout seo={seo} pageProps={props}>
 			<section

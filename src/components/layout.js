@@ -36,25 +36,29 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
 	const [theme, setTheme] = useState(currTheme);
-	let autoToggle = '';
+	
 	if (isWindow) {
 		if (theme === 'dark') {
 			document.documentElement.classList.add("dark");
 		}
-		autoToggle = () => {
-			localStorage.removeItem('theme')
-			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-				setTheme(theme => 'dark')
-				document.documentElement.classList.add("dark");
-			} else {
-				setTheme(theme => '')
-				document.documentElement.classList.remove("dark");
-			}
-		}
+		
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
 			autoToggle();
 		});
 		document.body.classList.remove('menu-opened')
+	}
+
+	autoToggle();
+
+	function autoToggle() {
+		localStorage.removeItem('theme')
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			setTheme(theme => 'dark')
+			document.documentElement.classList.add("dark");
+		} else {
+			setTheme(theme => '')
+			document.documentElement.classList.remove("dark");
+		}
 	}
 
 	function toggleTheme(whatTheme) {
@@ -143,7 +147,7 @@ const Layout = ({ children, pageProps, seo }) => {
 	return (
 		<div id='site-wrapper'
 			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
-			<Seo theme={theme} seo={seo} />
+			<Seo seo={seo} />
 			{isWindow && !('isPreloaderShown' in localStorage) ? <Preloader /> : ''}
 			<Header
 				language={language}
