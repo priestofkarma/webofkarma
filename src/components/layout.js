@@ -122,7 +122,7 @@ const Layout = ({ children, pageProps, seo }) => {
 	const { title } = data.allContentfulSiteMetadata.nodes[0]
 	const langSocial = getLangContent(language, data.allContentfulSocialLinks.nodes);
 	const social = getSocialItems(langSocial);
-	// const [loader, setLoader] = useState(!('isPreloaderShown' in localStorage));
+	// const [loader, setLoader] = useState(isWindow && !('isPreloaderShown' in localStorage));
 
 	useEffect(() => {
 		setTimeout(() => {
