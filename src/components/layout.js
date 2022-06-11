@@ -32,7 +32,7 @@ const Layout = ({ children, pageProps, seo }) => {
   	`)
 
 	/* theme */
-	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
+	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : false;
 	const [theme, setTheme] = useState(currTheme);
 	const autoToggle = () => {
 		localStorage.removeItem('theme')
@@ -40,14 +40,14 @@ const Layout = ({ children, pageProps, seo }) => {
 			setTheme(() => 'dark')
 			// document.documentElement.classList.add("dark");
 		} else {
-			setTheme(() => '')
+			setTheme(() => false)
 			// document.documentElement.classList.remove("dark");
 		}
 	}
 
 	function toggleTheme(whatTheme) {
 		if (whatTheme === 'light') {
-			setTheme(() => '');
+			setTheme(() => false);
 			localStorage.theme = 'light';
 			// document.documentElement.classList.remove("dark");
 		} else if (whatTheme === 'dark') {
