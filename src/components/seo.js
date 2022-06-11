@@ -2,7 +2,7 @@ import React from "react"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = ({ seo }) => {
+const Seo = ({ theme, seo }) => {
 	const { site } = useStaticQuery(
 		graphql`
 			query {
@@ -26,6 +26,7 @@ const Seo = ({ seo }) => {
 		<Helmet
 			htmlAttributes={{
 				lang,
+				class: theme
 			}}
 			title={title}
 			titleTemplate={`${concatTitle} | ${site.siteMetadata.title}`}

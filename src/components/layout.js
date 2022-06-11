@@ -32,16 +32,15 @@ const Layout = ({ children, pageProps, seo }) => {
   	`)
 
 	/* theme */
-	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : ' ';
+	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
 	const [theme, setTheme] = useState(currTheme);
-	console.log(theme)
 	const autoToggle = () => {
 		localStorage.removeItem('theme')
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			setTheme(() => 'dark')
 			document.documentElement.classList.add("dark");
 		} else {
-			setTheme(() => ' ')
+			setTheme(() => '')
 			document.documentElement.classList.remove("dark");
 		}
 	}
@@ -50,11 +49,11 @@ const Layout = ({ children, pageProps, seo }) => {
 		if (whatTheme === 'light') {
 			setTheme(() => '');
 			localStorage.theme = 'light';
-			document.documentElement.classList.remove("dark");
+			// document.documentElement.classList.remove("dark");
 		} else if (whatTheme === 'dark') {
 			setTheme(() => 'dark');
 			localStorage.theme = 'dark';
-			document.documentElement.classList.add("dark");
+			// document.documentElement.classList.add("dark");
 		}
 	}
 
@@ -131,7 +130,7 @@ const Layout = ({ children, pageProps, seo }) => {
 	return (
 		<div id='site-wrapper'
 			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
-			<Seo seo={seo} />
+			<Seo theme={theme} seo={seo} />
 			<div id='preloader' className='preloader bg-gradient-animation bg-gradient-to-br from-slate-50 to-cobalt-50 dark:from-slate-500 dark:to-cobalt-900 fixed flex items-center justify-center w-full h-full inset-0 z-50 bg-slate-700'>
 				<div className='preloader__logo w-32 xl:w-52 -mt-10 xl:-mt-20'>
 					<svg overflow='visible' viewBox="0 0 512 512">
