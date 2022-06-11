@@ -14,6 +14,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 	const menuBtnRef = useRef();
 	const tlRef = useRef();
 	gsap.registerPlugin(ScrollTrigger)
+	console.log(theme)
 
 	const data = useStaticQuery(graphql`
 		query headerQuery {

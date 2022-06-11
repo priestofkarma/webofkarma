@@ -34,13 +34,14 @@ const Layout = ({ children, pageProps, seo }) => {
 	/* theme */
 	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : ' ';
 	const [theme, setTheme] = useState(currTheme);
+	console.log(theme)
 	const autoToggle = () => {
 		localStorage.removeItem('theme')
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			setTheme(() => 'dark')
 			document.documentElement.classList.add("dark");
 		} else {
-			setTheme(() => '')
+			setTheme(() => ' ')
 			document.documentElement.classList.remove("dark");
 		}
 	}
