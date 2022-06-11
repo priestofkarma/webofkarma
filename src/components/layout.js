@@ -36,6 +36,7 @@ const Layout = ({ children, pageProps, seo }) => {
 	if (typeof window !== `undefined`) {
 		currTheme = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
 	}
+
 	const [theme, setTheme] = useState(currTheme);
 	let autoToggle = '';
 	if (typeof window !== `undefined`) {
@@ -143,7 +144,7 @@ const Layout = ({ children, pageProps, seo }) => {
 		<div id='site-wrapper'
 			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
 			<Seo theme={theme} seo={seo} />
-			{!('isPreloaderShown' in localStorage) ? <Preloader /> : ''}
+			{typeof window !== `undefined` && !('isPreloaderShown' in localStorage) ? <Preloader /> : ''}
 			<Header
 				language={language}
 				social={social}
