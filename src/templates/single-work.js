@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useIntl } from "gatsby-plugin-intl"
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
-import FadeInAnimation from '../components/fadeInAnimation'
+import FadeInAnimation from '../components/FadeInAnimation'
 import { BsArrowRightShort } from 'react-icons/bs'
 import WhatMedia from '../components/what-media'
 

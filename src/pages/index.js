@@ -8,7 +8,7 @@ import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import FadeInAnimation from '../components/fadeInAnimation'
+import FadeInAnimation from '../components/FadeInAnimation'
 import getSocialItems from '../utils/getSocialItems'
 import LetsWork from '../components/lets-work'
 import SingleWork from '../components/work-component'
