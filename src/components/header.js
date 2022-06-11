@@ -94,7 +94,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 												<li key={href} className='mb-4 2xl:mb-6'>
 													<Link to={'/' + language + href}
 														data-strength="20"
-														className={`${(window.location.pathname.includes(href)) ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
+														className={`${typeof window !== `undefined` && (window.location.pathname.includes(href)) ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
 														{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
 													</Link>
 												</li>
