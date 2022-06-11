@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import { Link } from 'gatsby'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const SingleWork = ({ work, index, language }) => {
 	gsap.registerPlugin(ScrollToPlugin);
@@ -53,11 +52,15 @@ const SingleWork = ({ work, index, language }) => {
 				className='work group block py-2 pb-12 xl:py-16 xl:px-16'>
 				<div
 					className="work-image w-full xl:max-w-xl 2xl:max-w-2xl xl:invisible xl:fixed z-10 xl:pointer-events-none">
-					<GatsbyImage
+					{/* <GatsbyImage
 						className='work-image-wrap w-full relative transition-all'
 						image={getImage(work.previewImage)}
 						alt={work.previewImage.title}
-					/>
+					/> */}
+					<img
+						className='work-image-wrap w-full relative transition-all'
+						src={work.previewImage.url}
+						alt={work.previewImage.title} />
 					{/* {work.videoPreview ? <video autoPlay loop muted playsInline
 						poster={work.previewImage.url}
 						className='work-image-wrap w-full relative transition-all'

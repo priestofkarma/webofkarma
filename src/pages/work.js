@@ -68,12 +68,11 @@ export const query = graphql`
 					}
 				}
 				previewImage {
-					gatsbyImageData(aspectRatio: 1.6)
-					title
 					url
+					title
 				}
 				previewImageMobile {
-					gatsbyImageData(aspectRatio: 0.625)
+					url
 					title
 				}
 			}
