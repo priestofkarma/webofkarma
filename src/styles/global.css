@@ -181,13 +181,13 @@
 	--cobalt-900-rgb: 0, 13, 25;
 }
 
-#preloader {
+.preloader {
 	transition: opacity 1s ease, visibility 1s ease, transform 1s ease;
 	z-index: 10000;
 	animation-duration: 3s;
 }
 
-body.page-loaded #preloader {
+body.page-loaded .preloader {
 	opacity: 0;
 	visibility: hidden;
 }

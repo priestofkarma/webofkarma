@@ -80,7 +80,6 @@ const Layout = ({ children, pageProps, seo }) => {
 					y: 0,
 					ease: "Elastic.easeOut"
 				});
-
 				if (this.querySelector(".magnetic-text")) {
 					gsap.to(this.querySelector(".magnetic-text"), 1.5, {
 						x: 0,
@@ -88,7 +87,6 @@ const Layout = ({ children, pageProps, seo }) => {
 						ease: "Elastic.easeOut"
 					});
 				}
-
 			});
 
 			function moveMagnet(event) {
@@ -136,7 +134,7 @@ const Layout = ({ children, pageProps, seo }) => {
 			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
 			<Seo seo={seo} />
 			{isWindow && !('isPreloaderShown' in localStorage) ?
-				<div id="preloader" className='preloader bg-gradient-animation bg-gradient-to-br from-slate-50 to-cobalt-50 dark:from-slate-500 dark:to-cobalt-900 fixed flex items-center justify-center w-full h-full inset-0 z-50 bg-slate-700'>
+				<div className='preloader bg-gradient-animation bg-gradient-to-br from-slate-50 to-cobalt-50 dark:from-slate-500 dark:to-cobalt-900 fixed flex items-center justify-center w-full h-full inset-0 z-50 bg-slate-700'>
 					<div className='preloader__logo w-32 xl:w-52 -mt-10 xl:-mt-20'>
 						<svg overflow='visible' viewBox="0 0 512 512">
 							<path className='leaf leaf01 fill-cobalt-100' d="M128,283.048c70.693,0,128,67.301,128,67.301s-57.307,67.301-128,67.301S0,350.349,0,350.349S57.307,283.048,128,283.048z" />
