@@ -36,7 +36,7 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	const currTheme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
 	const [theme, setTheme] = useState(currTheme);
-	
+	let autoToggle = '';
 	if (isWindow) {
 		if (theme === 'dark') {
 			document.documentElement.classList.add("dark");
@@ -48,9 +48,7 @@ const Layout = ({ children, pageProps, seo }) => {
 		document.body.classList.remove('menu-opened')
 	}
 
-	autoToggle();
-
-	function autoToggle() {
+	autoToggle = () => {
 		localStorage.removeItem('theme')
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			setTheme(theme => 'dark')
