@@ -5,8 +5,9 @@ const applyDarkModeClass = `
 	(function() {
 	try {
 		let mode = localStorage.getItem('theme');
-		if (mode === 'dark') {
+		if (mode === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			document.documentElement.classList.add("dark");
+			localStorage.setItem('theme', 'dark');
 		}
 	} catch (e) {}
 	})();
