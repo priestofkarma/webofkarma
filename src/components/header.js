@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useRef } from 'react'
+import React, { useLayoutEffect, useEffect, useState, useRef } from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import LanguageSwitcher from './languageSwitcher'
 import Logo from './logo'
@@ -8,7 +8,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 	const intl = useIntl()
-
 	const [isOpen, setMenu] = useState(false);
 	const menuRef = useRef();
 	const menuOverlayRef = useRef();
@@ -24,11 +23,6 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 		}
   	`)
 
-	/* fix menu-opened when change page */
-	/* menu button */
-	/* if (isOpen) {
-		document.body.classList.remove('menu-opened')
-	} */
 	function toggleMenu() {
 		setMenu(isOpen => !isOpen);
 
@@ -41,7 +35,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 		}
 	}
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		tlRef.current = gsap.timeline({ paused: true })
 			.to(menuRef.current, { x: 0, duration: 1, ease: "power4.inOut" })
 			.from(menuRef.current.querySelectorAll('.menu__item'),
@@ -62,10 +56,10 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 
 	/* Navigation */
 	const navLinks = [
-		{ href: `/${language}/work`, label: 'work', count: data.allContentfulSingleWork.totalCount / 2 },
-		{ href: `/${language}/posts`, label: 'posts', count: 9 },
-		{ href: `/${language}/library`, label: 'library' },
-		{ href: `/${language}/about`, label: 'about' },
+		{ href: `/work`, label: 'work', count: data.allContentfulSingleWork.totalCount / 2 },
+		{ href: `/posts`, label: 'posts', count: 9 },
+		{ href: `/library`, label: 'library' },
+		{ href: `/about`, label: 'about' },
 	];
 
 	return (
@@ -98,7 +92,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 										{navLinks.map(({ href, label, count }) => {
 											return (
 												<li key={href} className='mb-4 2xl:mb-6'>
-													<Link to={href}
+													<Link to={'/' + language + href}
 														data-strength="20"
 														className={`${(window.location.pathname.includes(href)) ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
 														{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}

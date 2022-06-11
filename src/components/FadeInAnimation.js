@@ -3,32 +3,34 @@ import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 const FadeInAnimation = ({
-
 	children,
 	elem = 'div',
-	direction = null,
+	direction = 'up',
 	delay = 0,
 	delayFrom = 767,
+	distance = 20,
 	...props
 }) => {
 	gsap.registerPlugin(ScrollTrigger)
 
 	const Component = elem;
 	const compRef = useRef(null);
-	const distance = 20;
 	let fadeDirection;
 	switch (direction) {
 		case "left":
-			fadeDirection = { x: -distance + '%' };
+			fadeDirection = { x: distance + '%' };
 			break;
 		case "right":
-			fadeDirection = { x: distance + '%' };
+			fadeDirection = { x: -distance + '%' };
 			break;
 		case "up":
 			fadeDirection = { y: distance + '%' };
 			break;
 		case "down":
 			fadeDirection = { y: -distance + '%' };
+			break;
+		case "scale":
+			fadeDirection = { scale: -distance };
 			break;
 		default:
 			fadeDirection = { y: 0 };

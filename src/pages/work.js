@@ -51,7 +51,7 @@ const WorkPage = (props) => {
 
 export const query = graphql`
 	query WorkPageQuery($language: String) {
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date}) {
+		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date, order: DESC }) {
 			totalCount
 			nodes {
 				id
@@ -60,7 +60,7 @@ export const query = graphql`
 				workName
 				services
 				isBestWork
-				videoPreview {
+				macbookMedia {
 					url
 					file {
 						fileName

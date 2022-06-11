@@ -46,14 +46,19 @@ const SingleWork = ({ work, index, language }) => {
 	}, [])
 
 	return (
-		<li className={`md:w-1/2 xl:w-full md:pl-8 xl:px-16 border-slate-500 dark:border-zinc-500 ${(index > 1) ? 'hidden xl:block' : ''} xl:border-b ${(index === 0) ? 'xl:border-t' : ''}`}>
+		<li className={`md:w-1/2 xl:w-full border-slate-500 dark:border-zinc-500 ${(index > 1) ? 'hidden xl:block' : ''} xl:border-b ${(index === 0) ? 'xl:border-t' : ''}`}>
 			<Link
 				ref={workRef}
 				to={`/${language}/${work.path}`}
-				className='work group block py-2 pb-12 xl:py-16'>
+				className='work group block py-2 pb-12 xl:py-16 xl:px-16'>
 				<div
 					className="work-image w-full xl:max-w-xl 2xl:max-w-2xl xl:invisible xl:fixed z-10 xl:pointer-events-none">
-					{work.videoPreview ? <video autoPlay loop muted playsInline
+					<GatsbyImage
+						className='work-image-wrap w-full relative transition-all'
+						image={getImage(work.previewImage)}
+						alt={work.previewImage.title}
+					/>
+					{/* {work.videoPreview ? <video autoPlay loop muted playsInline
 						poster={work.previewImage.url}
 						className='work-image-wrap w-full relative transition-all'
 						src={work.videoPreview.url}></video> :
@@ -61,7 +66,7 @@ const SingleWork = ({ work, index, language }) => {
 							className='work-image-wrap w-full relative transition-all'
 							image={getImage(work.previewImage)}
 							alt={work.previewImage.title}
-						/>}
+						/>} */}
 				</div>
 				<div className='xl:flex items-center justify-between'>
 					<h3

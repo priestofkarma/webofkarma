@@ -31,9 +31,7 @@ const Layout = ({ children, pageProps, seo }) => {
 		}
   	`)
 
-
 	/* theme */
-
 	const [theme, setTheme] = useState(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '');
 
 	if (theme === 'dark') {
@@ -53,12 +51,12 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	function toggleTheme(whatTheme) {
 		if (whatTheme === 'light') {
-			setTheme(theme => '')
-			localStorage.theme = 'light'
+			setTheme(theme => '');
+			localStorage.theme = 'light';
 			document.documentElement.classList.remove("dark");
 		} else if (whatTheme === 'dark') {
-			setTheme(theme => 'dark')
-			localStorage.theme = 'dark'
+			setTheme(theme => 'dark');
+			localStorage.theme = 'dark';
 			document.documentElement.classList.add("dark");
 		}
 	}
@@ -67,6 +65,7 @@ const Layout = ({ children, pageProps, seo }) => {
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
 			autoToggle();
 		});
+		document.body.classList.remove('menu-opened')
 	}, [])
 
 	useEffect(() => {

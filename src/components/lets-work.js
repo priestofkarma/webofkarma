@@ -6,7 +6,6 @@ import { BsArrowRightShort } from 'react-icons/bs'
 
 const LetsWork = () => {
 	const intl = useIntl()
-
 	const data = useStaticQuery(graphql`
 		query letsWork {
 			allContentfulSiteMetadata {
@@ -36,7 +35,7 @@ const LetsWork = () => {
 						<span className='inline-block hover:scale-150 duration-500 transition-transform'>
 							<GatsbyImage
 								style={{ width: '1em', height: '1em' }}
-								data-strenght={100}
+								data-strenght={50}
 								className='inline-block magnetic rounded-full'
 								image={getImage(image)}
 								alt={image.title}

@@ -363,7 +363,7 @@ export const query = graphql`
 				}
 			}
 		}
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date}) {
+		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date, order: DESC}) {
 			totalCount
 			nodes {
 				id
@@ -372,12 +372,9 @@ export const query = graphql`
 				workName
 				services
 				isBestWork
-				videoPreview {
+				macbookMedia {
 					url
-					file {
-						fileName
-						contentType
-					}
+					title
 				}
 				previewImage {
 					gatsbyImageData(aspectRatio: 1.6)

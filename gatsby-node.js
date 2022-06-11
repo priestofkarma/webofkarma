@@ -9,7 +9,12 @@ exports.createPages = ({ graphql, actions }) => {
 			allContentfulSingleWork {
 				edges {
 					node {
+						id
 						path
+						workName
+						previewImage {
+							gatsbyImageData
+						}
 					}
 				}
 			}
@@ -19,13 +24,20 @@ exports.createPages = ({ graphql, actions }) => {
 			throw result.errors
 		}
 
-		result.data.allContentfulSingleWork.edges.forEach(edge => {
+		result.data.allContentfulSingleWork.edges.forEach((edge, index) => {
+			const works = result.data.allContentfulSingleWork.edges;
 			const pagePath = edge.node.path
+			const prev = index === 0 ? null : works[index - 1];
+			const next = index === works.length - 1 ? null : works[index + 1];
+		
 			createPage({
 				path: pagePath,
 				component: singleWorkTemplate,
 				context: {
+					id: edge.node.id,
 					slug: pagePath,
+					prev,
+					next
 				},
 			})
 		})
