@@ -38,10 +38,10 @@ const Layout = ({ children, pageProps, seo }) => {
 		localStorage.removeItem('theme')
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			setTheme(() => 'dark')
-			document.documentElement.classList.add("dark");
+			// document.documentElement.classList.add("dark");
 		} else {
 			setTheme(() => '')
-			document.documentElement.classList.remove("dark");
+			// document.documentElement.classList.remove("dark");
 		}
 	}
 
@@ -58,9 +58,9 @@ const Layout = ({ children, pageProps, seo }) => {
 	}
 
 	useEffect(() => {
-		if (theme === 'dark') {
+		/* if (theme === 'dark') {
 			document.documentElement.classList.add("dark");
-		}
+		} */
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
 			autoToggle();
 		});

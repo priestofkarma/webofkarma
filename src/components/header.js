@@ -113,7 +113,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 									<button
 										data-strength="10"
 										onClick={() => onToggleTheme('light')}
-										className={`${theme !== 'dark' ? 'text-orange-600 font-medium' : ''} magnetic transition-colors flex items-center mr-4`}>
+										className={`${theme === '' || theme === 'light' ? 'text-orange-600 font-medium' : ''} magnetic transition-colors flex items-center mr-4`}>
 										<span>{intl.formatMessage({ id: "light" })}</span>
 									</button>
 									<button
