@@ -50,9 +50,11 @@ const Layout = ({ children, pageProps, seo }) => {
 				document.documentElement.classList.remove("dark");
 			}
 		}
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+			autoToggle();
+		});
+		document.body.classList.remove('menu-opened')
 	}
-
-
 
 	function toggleTheme(whatTheme) {
 		if (whatTheme === 'light') {
@@ -66,12 +68,12 @@ const Layout = ({ children, pageProps, seo }) => {
 		}
 	}
 
-	useEffect(() => {
+/* 	useEffect(() => {
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
 			autoToggle();
 		});
 		document.body.classList.remove('menu-opened')
-	}, [])
+	}, []) */
 
 	useEffect(() => {
 
