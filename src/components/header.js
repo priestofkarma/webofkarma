@@ -95,7 +95,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 												<li key={href} className='mb-4 2xl:mb-6'>
 													<Link to={'/' + language + href}
 														data-strength="20"
-														className={`${typeof window !== `undefined` && (window.location.pathname.includes(href)) ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
+														className={`${typeof window !== `undefined` && window.location.pathname === '/' + language + href ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
 														{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
 													</Link>
 												</li>
@@ -113,7 +113,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 									<button
 										data-strength="10"
 										onClick={() => onToggleTheme('light')}
-										className={`${theme === '' || theme === 'light' ? 'text-orange-600 font-medium' : ''} magnetic transition-colors flex items-center mr-4`}>
+										className={`${theme !== 'dark' ? 'text-orange-600 font-medium' : ''} magnetic transition-colors flex items-center mr-4`}>
 										<span>{intl.formatMessage({ id: "light" })}</span>
 									</button>
 									<button
