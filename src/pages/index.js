@@ -201,7 +201,7 @@ const IndexPage = (props) => {
 								className='can-help-item'>
 								<div className='can-help-num'>01</div>
 								<hr className='can-help-hr' />
-								<h4 className='can-help-title'>{canHelpFirstItemTitle}</h4>
+								<h3 className='h4 can-help-title'>{canHelpFirstItemTitle}</h3>
 								<div
 									className='can-help-text'
 									dangerouslySetInnerHTML={{ __html: canHelpFirstItemText.childMarkdownRemark.html }}></div>
@@ -214,7 +214,7 @@ const IndexPage = (props) => {
 								className='can-help-item'>
 								<div className='can-help-num'>02</div>
 								<hr className='can-help-hr' />
-								<h4 className='can-help-title'>{canHelpSecondItemTitle}</h4>
+								<h3 className='h4 can-help-title'>{canHelpSecondItemTitle}</h3>
 								<div
 									className='can-help-text'
 									dangerouslySetInnerHTML={{ __html: canHelpSecondItemText.childMarkdownRemark.html }}></div>
@@ -227,7 +227,7 @@ const IndexPage = (props) => {
 								className='can-help-item'>
 								<div className='can-help-num'>03</div>
 								<hr className='can-help-hr' />
-								<h4 className='can-help-title'><BsStars className='inline mr-2' />{canHelpThirdItemTitle}</h4>
+								<h3 className='h4 can-help-title'><BsStars className='inline mr-2' />{canHelpThirdItemTitle}</h3>
 								<div
 									className='can-help-text'
 									dangerouslySetInnerHTML={{ __html: canHelpThirdItemText.childMarkdownRemark.html }}></div>

@@ -153,7 +153,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 					</div>
 				</div>
 
-				<Link to='/' className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
+				<Link to='/' aria-label="To homepage" className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
 					<Logo clazzName='w-10 xl:w-12 2xl:w-16 -mt-1' />
 				</Link>
 
