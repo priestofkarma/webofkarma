@@ -51,7 +51,8 @@ const WorkPage = (props) => {
 
 export const query = graphql`
 	query WorkPageQuery($language: String) {
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date, order: DESC }) {
+		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } }
+			sort: {fields: date, order: DESC }) {
 			totalCount
 			nodes {
 				id
