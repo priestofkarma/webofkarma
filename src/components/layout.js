@@ -9,6 +9,7 @@ import getSocialItems from '../utils/getSocialItems'
 import getLangContent from '../utils/getLangContent'
 
 const Layout = ({ children, pageProps, seo }) => {
+	const isWindow = typeof window !== `undefined`;
 	const { location } = pageProps
 	const { language } = pageProps.pageContext
 	const data = useStaticQuery(graphql`
@@ -32,14 +33,10 @@ const Layout = ({ children, pageProps, seo }) => {
   	`)
 
 	/* theme */
-	let currTheme = '';
-	if (typeof window !== `undefined`) {
-		currTheme = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
-	}
-
+	const currTheme = isWindow && localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
 	const [theme, setTheme] = useState(currTheme);
 	let autoToggle = '';
-	if (typeof window !== `undefined`) {
+	if (isWindow) {
 		if (theme === 'dark') {
 			document.documentElement.classList.add("dark");
 		}
@@ -144,7 +141,7 @@ const Layout = ({ children, pageProps, seo }) => {
 		<div id='site-wrapper'
 			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
 			<Seo theme={theme} seo={seo} />
-			{typeof window !== `undefined` && !('isPreloaderShown' in localStorage) ? <Preloader /> : ''}
+			{isWindow && !('isPreloaderShown' in localStorage) ? <Preloader /> : ''}
 			<Header
 				language={language}
 				social={social}
