@@ -6,7 +6,7 @@ const applyDarkModeClass = `
 	try {
 		let mode = localStorage.getItem('theme');
 		if (mode === 'dark') {
-			document.body.classList.add('dark');
+			document.documentElement.classList.add("dark");
 		}
 	} catch (e) {}
 	})();
