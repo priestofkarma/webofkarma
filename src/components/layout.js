@@ -32,7 +32,8 @@ const Layout = ({ children, pageProps, seo }) => {
   	`)
 
 	/* theme */
-	const currTheme = typeof window !== `undefined` && localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
+	
+	const currTheme = (typeof window !== `undefined` && localStorage.theme === 'dark') || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : '';
 	const [theme, setTheme] = useState(currTheme);
 	let autoToggle = '';
 	if (typeof window !== `undefined`) {
