@@ -9,6 +9,9 @@ const applyDarkModeClass = `
 			document.documentElement.classList.add("dark");
 			localStorage.setItem('theme', 'dark');
 		}
+		if (('isPreloaderShown' in localStorage)) {
+			document.getElementById('preloader').remove()
+		}
 	} catch (e) {}
 	})();
 `;
