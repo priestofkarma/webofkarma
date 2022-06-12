@@ -3,6 +3,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import LanguageSwitcher from './languageSwitcher'
 import Logo from './logo'
 import { useIntl } from "gatsby-plugin-intl"
+import ThemeSwitcher from '../components/themeSwitcher'
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -108,20 +109,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 							<div className="menu__item mt-auto mb-4">
 								<h5 className='text-zinc-400 text-xs lg:text-sm'>{intl.formatMessage({ id: "theme" })}</h5>
 								<hr className='mt-2 mb-4 border-zinc-400' />
-								<div className='flex'>
-									<button
-										data-strength="10"
-										onClick={() => onToggleTheme('light')}
-										className={`${!theme ? 'text-orange-600 font-medium' : ''} magnetic transition-colors flex items-center mr-4`}>
-										<span>{intl.formatMessage({ id: "light" })}</span>
-									</button>
-									<button
-										data-strength="10"
-										onClick={() => onToggleTheme('dark')}
-										className={`${theme === 'dark' ? 'text-purple-600 font-medium' : ''} magnetic transition-colors flex items-center`}>
-										<span>{intl.formatMessage({ id: "dark" })}</span>
-									</button>
-								</div>
+								<ThemeSwitcher theme={theme} onToggleTheme={onToggleTheme}/>
 							</div>
 
 							<div className="menu__item mt-auto mb-4">
