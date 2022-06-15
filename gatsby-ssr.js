@@ -15,14 +15,11 @@ const applyModeClass = `
 	})();
 `;
 
-export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
-	const script = createElement('script', {
-		dangerouslySetInnerHTML: {
-			__html: applyModeClass,
-		},
-	});
-	// setPreBodyComponents([script]);
-	setHeadComponents([script],[
+export const onRenderBody = ({ setHeadComponents }) => {
+	setHeadComponents([
+		<script 
+		key='remove-fouc-script'
+		dangerouslySetInnerHTML={{ __html: applyModeClass }}></script>,
 		<link
 			key="mariupol-regular"
 			rel="preload"
