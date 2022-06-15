@@ -11,9 +11,8 @@ const ThemeContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		function loadTheme() {
-			const theme = (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : false;
-			// const theme = localStorage.getItem('theme');
-			return theme || 'light';
+			return (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+			// return theme || 'light';
 		}
 		setTheme(loadTheme());
 	}, []);

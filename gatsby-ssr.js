@@ -1,29 +1,28 @@
 import React from 'react';
 import { createElement } from 'react';
 
-/* const applyDarkModeClass = `
+const applyModeClass = `
 	(function() {
 	try {
-		let mode = localStorage.getItem('theme');
-		if (mode === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			document.documentElement.classList.add("dark");
-			localStorage.setItem('theme', 'dark');
-		}
-		if (('isPreloaderShown' in localStorage)) {
+		const mode = (localStorage.theme === 'dark') || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+		console.log(mode);
+		document.documentElement.classList.add(mode);
+		localStorage.setItem('theme', mode);
+		/* if (('isPreloaderShown' in localStorage)) {
 			document.getElementById('preloader').remove()
-		}
+		} */
 	} catch (e) {}
 	})();
-`; */
+`;
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
-	/* const script = createElement('script', {
+	const script = createElement('script', {
 		dangerouslySetInnerHTML: {
-			__html: applyDarkModeClass,
+			__html: applyModeClass,
 		},
 	});
-	setPreBodyComponents([script]); */
-	setHeadComponents([
+	// setPreBodyComponents([script]);
+	setHeadComponents([script],[
 		<link
 			key="mariupol-regular"
 			rel="preload"
