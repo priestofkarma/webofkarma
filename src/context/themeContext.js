@@ -12,10 +12,9 @@ const ThemeContextProvider = ({ children }) => {
 	useEffect(() => {
 		function loadTheme() {
 			return (isWindow && localStorage.theme === 'dark') || (isWindow && !('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-			// return theme || 'light';
 		}
 		setTheme(loadTheme());
-	}, []);
+	}, [isWindow]);
 
 	useEffect(() => {
 		localStorage.setItem('theme', theme);

@@ -95,7 +95,7 @@ const SingleWork = (props) => {
 
 	return (
 		<Layout pageProps={props}>
-			<div className="">
+			<div>
 				<div className='pt-32 lg:pt-48 pb-10 md:pb-16 lg:pb-28 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800'>
 					<div className="container">
 						<div className="relative max-w-5xl mx-auto mb-10 ">

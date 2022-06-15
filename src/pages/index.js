@@ -244,12 +244,39 @@ const IndexPage = (props) => {
 					<div className='py-8 pb-16 md:py-16' >
 						<h2 className='h2'>{intl.formatMessage({ id: "recent_work" })}</h2>
 						<ul
-							className='flex flex-wrap md:-ml-8 xl:-mx-16'>
+							className='flex flex-wrap md:-mx-4 xl:-mx-16 2xl:-mx-24'>
 							{data.allWork.nodes.slice(0, 4).map((work, index) => {
+								const services = work.services.join(" & ");
 								return (
-									<SingleWork key={work.id} work={work} index={index} language={language} />
+									<SingleWork
+										key={work.id}
+										work={work}
+										language={language}
+										linkClasses={`xl:py-16 xl:px-16 2xl:px-24`}
+										clazzName={`md:w-1/2 md:px-4 xl:px-0 xl:w-full`}
+									>
+										<div
+											className="work-image w-full xl:max-w-xl 2xl:max-w-2xl xl:invisible xl:fixed z-10 xl:pointer-events-none">
+											<img
+												className='work-image-wrap w-full relative transition-all aspect-[8/5] xl:aspect-auto object-cover'
+												src={work.previewImage.url}
+												alt={work.previewImage.title} />
+										</div>
+										<div className='xl:flex items-center justify-between'>
+											<h3
+												style={{ willChange: 'opacity, transform' }}
+												className='inline-block text-2xl md:text-3xl lg:text-4xl xl:text-7xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-8 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
+											<hr className='mt-3 mb-3 md:mb-6 xl:mb-0 xl:hidden border-zinc-400 dark:border-slate-600' />
+											<span
+												style={{ willChange: 'opacity, transform' }}
+												className='inline-block xl:text-lg text-slate-700 dark:text-zinc-400 transition-all group-hover:-skew-x-12 xl:group-hover:-translate-x-8 duration-500 xl:group-hover:opacity-50 translate-z-0'>
+												{services}
+											</span>
+										</div>
+									</SingleWork>
 								)
 							})}
+							<hr className='hidden xl:block w-full border-slate-500 dark:border-zinc-500' />
 						</ul>
 						<div className='flex justify-center pt-2 md:pt-8 xl:pt-20'>
 							<Link to={'/' + language + '/work'} className='group button-outline magnetic'

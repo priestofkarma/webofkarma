@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useStaticQuery, graphql } from "gatsby"
 import { ThemeContext } from '../context/themeContext';
 import Header from './header'
@@ -34,16 +34,8 @@ const Layout = ({ children, pageProps, seo }) => {
   	`)
 
 	/* theme */
-	function autoToggle() {
-		localStorage.removeItem('theme')
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			setTheme('dark')
-		} else {
-			setTheme('light')
-		}
-	}
 
-	const handleThemeToggle = (whatTheme) => {
+	function handleThemeToggle(whatTheme) {
 		if (whatTheme === 'light') {
 			setTheme('light');
 		} else if (whatTheme === 'dark') {
@@ -52,11 +44,19 @@ const Layout = ({ children, pageProps, seo }) => {
 	}
 
 	useEffect(() => {
+		function autoToggle() {
+			localStorage.removeItem('theme')
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				setTheme('dark')
+			} else {
+				setTheme('light')
+			}
+		}
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
 			autoToggle();
 		});
 		document.body.classList.remove('menu-opened')
-	}, [])
+	}, [setTheme])
 
 	useEffect(() => {
 		const magnets = document.querySelectorAll('.magnetic');
@@ -117,8 +117,6 @@ const Layout = ({ children, pageProps, seo }) => {
 			document.getElementById('preloader').remove()
 		} */
 	}, [])
-
-	console.log(theme)
 
 	return (
 		<div id='site-wrapper'

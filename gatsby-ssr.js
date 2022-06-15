@@ -5,7 +5,6 @@ const applyModeClass = `
 	(function() {
 	try {
 		const mode = (localStorage.theme === 'dark') || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-		console.log(mode);
 		document.documentElement.classList.add(mode);
 		localStorage.setItem('theme', mode);
 		/* if (('isPreloaderShown' in localStorage)) {
