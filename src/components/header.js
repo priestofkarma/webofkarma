@@ -3,7 +3,6 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import LanguageSwitcher from './languageSwitcher'
 import Logo from './logo'
 import { useIntl } from "gatsby-plugin-intl"
-import ThemeSwitcher from '../components/themeSwitcher'
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -15,7 +14,6 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 	const menuBtnRef = useRef();
 	const tlRef = useRef();
 	gsap.registerPlugin(ScrollTrigger)
-	console.log(theme)
 
 	const data = useStaticQuery(graphql`
 		query headerQuery {
@@ -109,7 +107,20 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 							<div className="menu__item mt-auto mb-4">
 								<h5 className='text-zinc-400 text-xs lg:text-sm'>{intl.formatMessage({ id: "theme" })}</h5>
 								<hr className='mt-2 mb-4 border-zinc-400' />
-								<ThemeSwitcher theme={theme} onToggleTheme={onToggleTheme}/>
+								<div className='flex'>
+									<button
+										data-strength="10"
+										onClick={() => onToggleTheme('light')}
+										className={`${theme !== 'dark' ? 'text-orange-600 font-medium' : ''} magnetic transition-colors flex items-center mr-4`}>
+										<span>{intl.formatMessage({ id: "light" })}</span>
+									</button>
+									<button
+										data-strength="10"
+										onClick={() => onToggleTheme('dark')}
+										className={`${theme === 'dark' ? 'text-purple-600 font-medium' : ''} magnetic transition-colors flex items-center`}>
+										<span>{intl.formatMessage({ id: "dark" })}</span>
+									</button>
+								</div>
 							</div>
 
 							<div className="menu__item mt-auto mb-4">
@@ -140,7 +151,7 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 					</div>
 				</div>
 
-				<Link to='/' aria-label="To homepage" className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
+				<Link to={'/'+language+'/'} aria-label="To homepage" className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
 					<Logo clazzName='w-10 xl:w-12 2xl:w-16 -mt-1' />
 				</Link>
 

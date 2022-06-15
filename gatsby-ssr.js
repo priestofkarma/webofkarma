@@ -1,7 +1,7 @@
 import React from 'react';
 import { createElement } from 'react';
 
-const applyDarkModeClass = `
+/* const applyDarkModeClass = `
 	(function() {
 	try {
 		let mode = localStorage.getItem('theme');
@@ -14,15 +14,15 @@ const applyDarkModeClass = `
 		}
 	} catch (e) {}
 	})();
-`;
+`; */
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
-	const script = createElement('script', {
+	/* const script = createElement('script', {
 		dangerouslySetInnerHTML: {
 			__html: applyDarkModeClass,
 		},
 	});
-	setPreBodyComponents([script]);
+	setPreBodyComponents([script]); */
 	setHeadComponents([
 		<link
 			key="mariupol-regular"
