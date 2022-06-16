@@ -13,7 +13,8 @@ exports.createPages = ({ graphql, actions }) => {
 						path
 						workName
 						previewImage {
-							gatsbyImageData
+							url
+							title
 						}
 					}
 				}

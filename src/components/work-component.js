@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { Link } from 'gatsby'
-import ScrollTrigger from "gsap/ScrollTrigger";
 
 const SingleWork = ({ dataService, work, language, clazzName, linkClasses, children }) => {
-	gsap.registerPlugin(ScrollTrigger);
 
 	const workRef = useRef()
 	useEffect(() => {

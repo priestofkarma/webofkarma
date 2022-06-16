@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { graphql } from 'gatsby'
+import React, { useEffect, useRef } from 'react'
+import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useIntl } from "gatsby-plugin-intl"
@@ -12,6 +12,8 @@ import WhatMedia from '../components/what-media'
 const SingleWork = (props) => {
 	const intl = useIntl()
 	const { data } = props
+	const nextWorkRef = useRef();
+	console.log(data.allContentfulSingleWork.totalCount)
 	const {
 		workName,
 		services,
@@ -33,6 +35,14 @@ const SingleWork = (props) => {
 		blockOrder
 	} = data.contentfulSingleWork
 
+	const seo = {
+		title: workName,
+		description: workDescription.workDescription,
+		image: heroImage.url
+	}
+
+	const nextWork = props.pageContext.next.node
+
 	/* block order - [iMac, MacBook, iPad, iPhone, First Media, Second Media] */
 	const order = {
 		imac: blockOrder[0],
@@ -47,6 +57,7 @@ const SingleWork = (props) => {
 
 	gsap.registerPlugin(ScrollTrigger)
 	useEffect(() => {
+
 		const parallax = document.querySelectorAll('.parallax');
 		parallax.forEach(item => {
 			let dataParallax = item.getAttribute('data-parallax') || 10;
@@ -85,16 +96,27 @@ const SingleWork = (props) => {
 				trigger: iphonesBlock,
 				start: "top bottom",
 				end: "bottom top",
-				scrub: 1
+				scrub: true
 			},
 			yPercent: -15,
 			ease: 'none',
 		});
 
+		const nextWorkImage = nextWorkRef.current.querySelector('.next-work-image')
+		gsap.from(nextWorkImage, {
+			scrollTrigger: {
+				trigger: nextWorkRef.current,
+				start: "20% bottom",
+				end: "130% bottom",
+				scrub: true
+			},
+			yPercent: 70,
+			ease: 'none',
+		});
 	}, [])
 
 	return (
-		<Layout pageProps={props}>
+		<Layout pageProps={props} seo={seo}>
 			<div>
 				<div className='pt-32 lg:pt-48 pb-10 md:pb-16 lg:pb-28 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800'>
 					<div className="container">
@@ -268,12 +290,43 @@ const SingleWork = (props) => {
 
 				</div>
 			</div>
+			<div className='bg-zinc-900 text-white text-center pt-10 pb-4 md:pt-16 md:pb-8 xl:pt-24'
+				ref={nextWorkRef}>
+				<div className="container">
+					<Link className='group max-w-screen-sm mx-auto relative block'
+						to={'/' + props.pageContext.language + '/' + nextWork.path}>
+						<div className='overflow-hidden flex flex-col items-center'>
+							<div>
+								<p className='mb-2 xl:mb-6'>{intl.formatMessage({ id: "next_case" })}</p>
+								<h2 className='group-hover:opacity-50 text-5xl xl:text-8xl xl:-mb-20 transition-opacity duration-700' >{nextWork.workName}</h2>
+							</div>
+							<div
+								className='next-work-image w-10/12 max-w-sm'
+								style={{willChange: 'transform'}}
+								>
+								<img className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out' src={nextWork.previewImage.url} alt={nextWork.previewImage.title} />
+							</div>
+						</div>
+						<hr className='w-full mb-8 border-zinc-600' />
+					</Link>
+					<Link to={`/${props.pageContext.language}/work`}
+						className='magnetic button-outline border-zinc-600 justify-center w-full sm:w-auto'>
+						<span className='magnetic-text relative flex'>
+							{intl.formatMessage({ id: "all_work" })}
+							<sup>{data.allContentfulSingleWork.totalCount / 2}</sup>
+						</span>
+					</Link>
+				</div>
+			</div>
 		</Layout>
 	)
 }
 
 export const query = graphql`
 	query singleWorkQuery($slug: String, $language: String) {
+		allContentfulSingleWork {
+			totalCount
+		}
 		contentfulSingleWork(path: {eq: $slug}, node_locale: {eq: $language}) {
 			path
 			node_locale
@@ -284,6 +337,7 @@ export const query = graphql`
 			date
 			liveLink
 			workDescription {
+				workDescription
 				childMarkdownRemark {
 					html
 				}

@@ -17,6 +17,7 @@
 	"scroll_down": "Scroll down",
 	"recent_work": "Recent work",
 	"more_work": "More work",
+	"all_work": "All work",
 	"usefulness": "Usefulness",
 	"services": "Services",
 	"client": "Client",
@@ -24,6 +25,8 @@
 	"year": "Year",
 	"location": "Location",
 	"my_works": "My works",
+	"contact": "Contact",
+	"next_case": "Next Case",
 	"contact_lead": "Let’s work together",
 	"all_rights": "All rights reserved"
 }

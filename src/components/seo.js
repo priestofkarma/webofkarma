@@ -3,24 +3,28 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 const Seo = ({ theme, seo }) => {
-	const { site } = useStaticQuery(
+	const data = useStaticQuery(
 		graphql`
 			query {
-				site {
-					siteMetadata {
+				allContentfulSiteMetadata {
+					nodes {
+						siteUrl
 						title
-						description
-						author
+						image {
+							url
+						}
+						description {
+							description
+						}
 					}
 				}
 			}
 		`)
-
-const { description, lang = typeof window !== `undefined` ? localStorage.getItem('gatsby-intl-language') || 'en' : 'en', meta = [], title } = site.siteMetadata;
-
-	const metaDescription = description || site.siteMetadata.description
-
-	const concatTitle = site.siteMetadata.title
+	const { description, title, image, lang = typeof window !== `undefined` ? localStorage.getItem('gatsby-intl-language') || 'en' : 'en', meta = [] } = data.allContentfulSiteMetadata.nodes[0];
+	const metaTitle = (seo && seo.title) || title
+	const metaDescription = (seo && seo.description) || description.description
+	const metaImage = (seo && seo.image) || image.url
+	const concatTitle = `${metaTitle} • ${title}`;
 
 	return (
 		<Helmet
@@ -29,11 +33,19 @@ const { description, lang = typeof window !== `undefined` ? localStorage.getItem
 				class: theme
 			}}
 			title={title}
-			titleTemplate={`${concatTitle} | ${site.siteMetadata.title}`}
+			titleTemplate={concatTitle}
 			meta={[
+				{
+					property: `title`,
+					content: concatTitle,
+				},
 				{
 					name: `description`,
 					content: metaDescription,
+				},
+				{
+					name: 'image',
+					content: metaImage,
 				},
 				{
 					property: `og:title`,
@@ -48,12 +60,16 @@ const { description, lang = typeof window !== `undefined` ? localStorage.getItem
 					content: `website`,
 				},
 				{
+					name: 'og:image',
+					content: metaImage,
+				},
+				{
 					name: `twitter:card`,
-					content: `summary`,
+					content: `summary_large_image`,
 				},
 				{
 					name: `twitter:creator`,
-					content: site.siteMetadata.author,
+					content: 'Zhenya Petrenko',
 				},
 				{
 					name: `twitter:title`,
@@ -62,6 +78,10 @@ const { description, lang = typeof window !== `undefined` ? localStorage.getItem
 				{
 					name: `twitter:description`,
 					content: metaDescription,
+				},
+				{
+					name: 'twitter:image',
+					content: metaImage,
 				},
 			].concat(meta)}
 		/>

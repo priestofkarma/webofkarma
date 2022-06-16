@@ -15,11 +15,6 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	const data = useStaticQuery(graphql`
 		query siteQuery {
-			allContentfulSiteMetadata {
-				nodes {
-					title
-				}
-			}
 			allContentfulSocialLinks {
 				nodes {
 					socialTitle
@@ -103,7 +98,6 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	}, [location])
 
-	const { title } = data.allContentfulSiteMetadata.nodes[0]
 	const langSocial = getLangContent(language, data.allContentfulSocialLinks.nodes);
 	const social = getSocialItems(langSocial);
 	// const [loader, setLoader] = useState(isWindow && !('isPreloaderShown' in localStorage));
@@ -126,7 +120,6 @@ const Layout = ({ children, pageProps, seo }) => {
 			<Header
 				language={language}
 				social={social}
-				siteTitle={title}
 				onToggleTheme={handleThemeToggle}
 				theme={theme} />
 			<div id="main" className='main grow'>

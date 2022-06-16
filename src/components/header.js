@@ -6,7 +6,7 @@ import { useIntl } from "gatsby-plugin-intl"
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
+const Header = ({ language, social, onToggleTheme, theme }) => {
 	const intl = useIntl()
 	const [isOpen, setMenu] = useState(false);
 	const menuRef = useRef();
@@ -55,10 +55,11 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 
 	/* Navigation */
 	const navLinks = [
-		{ href: `/work`, label: 'work', count: data.allContentfulSingleWork.totalCount / 2 },
+		{ href: `/work`, label: 'works', count: data.allContentfulSingleWork.totalCount / 2 },
 		{ href: `/posts`, label: 'posts', count: 9 },
-		{ href: `/library`, label: 'library' },
+		// { href: `/library`, label: 'library' },
 		{ href: `/about`, label: 'about' },
+		{ href: `/contact`, label: 'contact' },
 	];
 
 	return (
@@ -93,8 +94,8 @@ const Header = ({ siteTitle, language, social, onToggleTheme, theme }) => {
 												<li key={href} className='mb-4 2xl:mb-6'>
 													<Link to={'/' + language + href}
 														data-strength="20"
-														className={`${typeof window !== `undefined` && window.location.pathname === '/' + language + href ? 'text-cobalt-500' : ''} magnetic inline-block relative  hover:opacity-80 transition-colors`}>
-														{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
+														className={`magnetic group inline-block relative hover:opacity-80 transition-colors`}>
+														<div className={`link-dot -left-6 group-hover:scale-100 transition-transform ${typeof window !== `undefined` && window.location.pathname === '/' + language + href + '/' ? 'scale-100' : 'scale-0'}`}></div>{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
 													</Link>
 												</li>
 											)

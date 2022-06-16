@@ -10,9 +10,6 @@
 		@apply bg-cobalt-900 dark:bg-white inline-block absolute bottom-1/2 -left-2 translate-y-1/2 w-1.5 h-1.5 rounded-full;
 	}
 
-	.button {
-		@apply bg-cobalt-500
-	}
 
 	.button {
 		@apply inline-flex bg-cobalt-500 text-white py-5 px-8 rounded-full hover:bg-cobalt-600 active:bg-cobalt-700 transition-colors duration-300;
@@ -25,6 +22,10 @@
 	.button-icon {
 		@apply ml-2 text-xl h-auto group-hover:translate-x-1 shrink-0 group-hover:opacity-60;
 		transition: opacity 0.5s ease, transform 0.5s ease, fill 0.3s ease;
+	}
+
+	.button-active {
+		@apply button border bg-black text-white
 	}
 
 	h1, .h1 {

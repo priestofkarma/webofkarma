@@ -18,12 +18,9 @@ const IndexPage = (props) => {
 	const { data } = props
 	const secondBlockRef = useRef()
 	const intl = useIntl()
-	const seo = {
-		title: 'Home'
-	}
-
 	const social = getSocialItems(data.allContentfulSocialLinks.nodes[0])
 	const {
+		homepageTitle,
 		heroTitle,
 		heroSubtitle,
 		canHelpTitle,
@@ -36,6 +33,9 @@ const IndexPage = (props) => {
 		imagesGrid
 	} = data.allContentfulHomePage.nodes[0]
 
+	const seo = {
+		title: homepageTitle,
+	}
 	gsap.registerPlugin(ScrollToPlugin);
 	gsap.registerPlugin(ScrollTrigger)
 	function scrollDown() {
@@ -121,7 +121,7 @@ const IndexPage = (props) => {
 
 						<div className="relative block md:pl-16 pt-10 md:pt-16 lg:pt-8 xl:pt-20 xl:pl-40 md:w-1/2">
 							<div className="absolute w-full h-full inset-0 flex">
-								<svg viewBox="0 0 165 171" className="text-cobalt-500 dark:text-cobalt-700 max-w-2xl m-auto mr-0 w-full max-h-full h-auto block">
+								<svg viewBox="0 0 165 171" className='text-cobalt-500 dark:text-cobalt-700 max-w-2xl m-auto mr-0 w-full max-h-full h-auto block'>
 									<path d="M146.184 147.872C124.941 172.12 103.697 176.948 82.4531 162.356C61.2094 147.765 37.9271 121.585 12.6062 83.8188C-12.7146 46.0521 0.804158 19.9802 53.1625 5.60312C105.521 -8.77396 139.425 5.28125 154.875 47.7687C170.325 90.2562 167.428 123.624 146.184 147.872Z" fill="currentColor" />
 								</svg>
 							</div>
@@ -354,10 +354,12 @@ export const query = graphql`
 		allContentfulHomePage(filter: {node_locale: {eq: $language}}) {
 			nodes {
 				id
+				homepageTitle
 				heroTitle
 				node_locale
 				heroSubtitle {
 					id
+					heroSubtitle
 					childMarkdownRemark {
 						html
 					}
