@@ -6,6 +6,7 @@ import getLangContent from '../utils/getLangContent'
 const Footer = ({ language }) => {
 
 	const intl = useIntl()
+	const lang = intl.locale
 	const year = new Date().getFullYear();
 	const data = useStaticQuery(graphql`
 		query footerQuery {
@@ -31,7 +32,7 @@ const Footer = ({ language }) => {
 		}
   	`)
 
-	const langData = getLangContent(language, data.allContentfulSiteMetadata.nodes)
+	const langData = getLangContent(lang, data.allContentfulSiteMetadata.nodes)
 	const {
 		footerSlogan,
 	} = langData
@@ -42,7 +43,7 @@ const Footer = ({ language }) => {
 			className='py-6 lg:py-10 bg-zinc-900 text-zinc-300 shrink-0'>
 			<div className="container">
 				<div className='flex flex-wrap'>
-					<hr className='w-full my-6 xl:my-8 xl:mt-10 border-zinc-600' />
+					<hr className='w-full my-6 xl:my-8 xl:mt-0 border-zinc-600' />
 					<div className="flex flex-wrap w-full justify-between flex-row text-sm sm:text-left">
 						<span className='mb-1 mr-4'>© {year} {intl.formatMessage({ id: "all_rights" })}</span>
 						<span>{footerSlogan}</span>

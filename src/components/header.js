@@ -6,8 +6,9 @@ import { useIntl } from "gatsby-plugin-intl"
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-const Header = ({ language, social, onToggleTheme, theme }) => {
+const Header = ({ social, onToggleTheme, theme }) => {
 	const intl = useIntl()
+	const lang = intl.locale
 	const [isOpen, setMenu] = useState(false);
 	const menuRef = useRef();
 	const menuOverlayRef = useRef();
@@ -18,6 +19,9 @@ const Header = ({ language, social, onToggleTheme, theme }) => {
 	const data = useStaticQuery(graphql`
 		query headerQuery {
 			allContentfulSingleWork {
+				totalCount
+			}
+			allContentfulBlogPost {
 				totalCount
 			}
 		}
@@ -36,9 +40,9 @@ const Header = ({ language, social, onToggleTheme, theme }) => {
 
 	useEffect(() => {
 		tlRef.current = gsap.timeline({ paused: true })
-			.to(menuRef.current, { x: 0, duration: 1, ease: "power4.inOut" })
+			.to(menuRef.current, { x: 0, duration: 0.8, ease: "power4.inOut" })
 			.from(menuRef.current.querySelectorAll('.menu__item'),
-				{ xPercent: 40, duration: 1, stagger: 0.05, ease: "power4.inOut" }, '-=0.95')
+				{ xPercent: 40, duration: 0.8, stagger: 0.05, ease: "power4.inOut" }, '-=0.75')
 			.from(menuRef.current.querySelectorAll('.header__nav a'),
 				{ x: 50, duration: 1, stagger: 0.05, ease: "power4.inOut" }, '<')
 
@@ -56,9 +60,9 @@ const Header = ({ language, social, onToggleTheme, theme }) => {
 	/* Navigation */
 	const navLinks = [
 		{ href: `/work`, label: 'works', count: data.allContentfulSingleWork.totalCount / 2 },
-		{ href: `/posts`, label: 'posts', count: 9 },
-		// { href: `/library`, label: 'library' },
-		{ href: `/about`, label: 'about' },
+		{ href: `/articles`, label: 'articles', count: data.allContentfulBlogPost.totalCount / 2 },
+		{ href: `/library`, label: 'library' },
+		// { href: `/about`, label: 'about' },
 		{ href: `/contact`, label: 'contact' },
 	];
 
@@ -92,10 +96,10 @@ const Header = ({ language, social, onToggleTheme, theme }) => {
 										{navLinks.map(({ href, label, count }) => {
 											return (
 												<li key={href} className='mb-4 2xl:mb-6'>
-													<Link to={'/' + language + href}
+													<Link to={'/' + lang + href}
 														data-strength="20"
 														className={`magnetic group inline-block relative hover:opacity-80 transition-colors`}>
-														<div className={`link-dot -left-6 group-hover:scale-100 transition-transform ${typeof window !== `undefined` && window.location.pathname === '/' + language + href + '/' ? 'scale-100' : 'scale-0'}`}></div>{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
+														<div className={`link-dot -left-4 xl:-left-6 group-hover:scale-100 transition-transform ${typeof window !== `undefined` && window.location.pathname === '/' + lang + href ? 'scale-100' : 'scale-0'}`}></div>{intl.formatMessage({ id: label })}{count && <sup>{count}</sup>}
 													</Link>
 												</li>
 											)
@@ -152,11 +156,11 @@ const Header = ({ language, social, onToggleTheme, theme }) => {
 					</div>
 				</div>
 
-				<Link to={'/'+language+'/'} aria-label="To homepage" className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
+				<Link to={'/'+lang+'/'} aria-label="To homepage" className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
 					<Logo clazzName='w-10 xl:w-12 2xl:w-16 -mt-1' />
 				</Link>
 
-				<div className='fake-menu-btn absolute right-6 top-3 lg:right-12 lg:top-12'>
+				<div className={`fake-menu-btn absolute right-6 top-3 lg:right-12 lg:top-12`}>
 					<button
 						data-strenght='50'
 						className={`w-12 h-12 rounded-full duration-700 transition-colors magnetic`}
@@ -171,7 +175,7 @@ const Header = ({ language, social, onToggleTheme, theme }) => {
 						ref={menuBtnRef}
 						data-strenght='50'
 						data-strenght-text='35'
-						className={`${isOpen ? 'is-open bg-cobalt-600' : 'bg-black dark:bg-cobalt-500'} menu-btn w-12 h-12 lg:w-20 lg:h-20 rounded-full duration-700 transition-colors magnetic`}
+						className={`${isOpen ? 'is-open bg-cobalt-600 border-cobalt-700' : 'bg-black'} border border-neutral-700 menu-btn w-12 h-12 lg:w-20 lg:h-20 rounded-full duration-700 transition-colors magnetic`}
 						onClick={toggleMenu}>
 						<span className='magnetic-text menu-btn__inner'>
 							<span className='w-5 sm:w-6'></span>

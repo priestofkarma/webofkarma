@@ -7,12 +7,13 @@ import Seo from './seo'
 import gsap from 'gsap'
 import getSocialItems from '../utils/getSocialItems'
 import getLangContent from '../utils/getLangContent'
+import { useIntl } from "gatsby-plugin-intl"
 
-const Layout = ({ children, pageProps, seo }) => {
-	const { location } = pageProps
-	const { language } = pageProps.pageContext
+const Layout = ({ children, seo }) => {
+	const intl = useIntl()
+	const lang = intl.locale
+	const location = typeof window !== `undefined` && window.location
 	const { theme, setTheme } = useContext(ThemeContext);
-
 	const data = useStaticQuery(graphql`
 		query siteQuery {
 			allContentfulSocialLinks {
@@ -98,7 +99,7 @@ const Layout = ({ children, pageProps, seo }) => {
 
 	}, [location])
 
-	const langSocial = getLangContent(language, data.allContentfulSocialLinks.nodes);
+	const langSocial = getLangContent(lang, data.allContentfulSocialLinks.nodes);
 	const social = getSocialItems(langSocial);
 	// const [loader, setLoader] = useState(isWindow && !('isPreloaderShown' in localStorage));
 
@@ -112,13 +113,15 @@ const Layout = ({ children, pageProps, seo }) => {
 		} */
 	}, [])
 
+	// const pathName = typeof window !== `undefined` && window.location.pathname
+	// const page = pathName.slice(pathName.lastIndexOf('/') + 1);
+
 	return (
 		<div id='site-wrapper'
-			className='site-wrapper relative min-h-screen flex flex-col overflow-hidden dark:text-white bg-slate-50 dark:bg-zinc-900'>
+			className='site-wrapper relative min-h-screen flex flex-col dark:text-white bg-slate-50 dark:bg-zinc-900'>
 			<Seo theme={theme} seo={seo} />
 
 			<Header
-				language={language}
 				social={social}
 				onToggleTheme={handleThemeToggle}
 				theme={theme} />
@@ -136,7 +139,7 @@ const Layout = ({ children, pageProps, seo }) => {
 				</div> */}
 				{children}
 			</div>
-			<Footer language={language} social={social} />
+			<Footer social={social} />
 		</div>
 	)
 

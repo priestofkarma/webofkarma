@@ -12,13 +12,17 @@ import FadeInAnimation from '../components/FadeInAnimation'
 import getSocialItems from '../utils/getSocialItems'
 import LetsWork from '../components/lets-work'
 import SingleWork from '../components/work-component'
+import dateFormat from '../utils/dateFormat'
+import declOfNum from '../utils/declOfNum'
 
-const IndexPage = (props) => {
-	const { language } = props.pageContext
-	const { data } = props
+const IndexPage = ({ data }) => {
 	const secondBlockRef = useRef()
 	const intl = useIntl()
+	const lang = intl.locale
 	const social = getSocialItems(data.allContentfulSocialLinks.nodes[0])
+	const lastPost = data.allContentfulBlogPost.nodes[0]
+	const posts = data.allContentfulBlogPost.nodes
+
 	const {
 		homepageTitle,
 		heroTitle,
@@ -30,7 +34,8 @@ const IndexPage = (props) => {
 		canHelpSecondItemText,
 		canHelpThirdItemTitle,
 		canHelpThirdItemText,
-		imagesGrid
+		imagesGrid,
+		imagesSecondGrid
 	} = data.allContentfulHomePage.nodes[0]
 
 	const seo = {
@@ -69,7 +74,7 @@ const IndexPage = (props) => {
 	}, [])
 
 	return (
-		<Layout seo={seo} pageProps={props}>
+		<Layout seo={seo}>
 			<section
 				className='hero relative bg-no-repeat bg-left-top md:bg-left-bottom bg-cover'
 				style={{
@@ -82,12 +87,12 @@ const IndexPage = (props) => {
 						<div className='md:w-8/12 lg:w-1/2 xl:w-5/12 xl:max-w-screen-sm 2xl:max-w-screen-md'>
 
 							<Link
-								to={'/' + language}
+								to={`/${lang}/articles/${lastPost.path}`}
 								className="mb-8 group inline-flex items-center leading-none text-sm p-3 -mx-3 pr-4 bg-gray-50/10 hover:bg-gray-100/90 border dark:border-none dark:bg-gray-500/10 dark:hover:bg-gray-200/10 rounded-full backdrop-blur-sm transition-colors duration-500 cursor-pointer">
 								<span className='bg-green-400 py-2 px-2.5 mr-3 text-center shrink-0 inline-block text-black uppercase rounded-full text-xs leading-none'>
 									{intl.formatMessage({ id: "post" })}
 								</span>
-								<span className='text-ellipsis sm:w-64 sm:whitespace-nowrap overflow-hidden mr-1.5'>Dentalex - Курси для сучасних стоматологів</span>
+								<span className='text-ellipsis sm:w-64 sm:whitespace-nowrap overflow-hidden mr-1.5'>{lastPost.title}</span>
 								<BsArrowRightShort className='button-icon' />
 							</Link>
 
@@ -98,7 +103,7 @@ const IndexPage = (props) => {
 								className='text-md sm:text-lg lg:text-xl xl:w-9/12 leading-normal text-gray-700 dark:text-zinc-300'
 								dangerouslySetInnerHTML={{ __html: heroSubtitle.childMarkdownRemark.html }}></div>
 							<Link
-								to={'/' + language + '/contact'}
+								to={'/' + lang + '/contact'}
 								data-strenght={50}
 								data-text-strenght={30}
 								className="group button magnetic mt-12">
@@ -131,7 +136,7 @@ const IndexPage = (props) => {
 										const ind = index + 1
 										return (
 											<Link
-												to={`/${language}/${work.path}`}
+												to={`/${lang}/work/${work.path}`}
 												key={work.id}
 												className={`hero-image block group ${(ind % 2) ? 'w-36 lg:w-44 xl:w-60' : 'w-60 lg:w-72 xl:w-96'} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
 												<div data-strenght='100' className='magnetic'>
@@ -165,8 +170,8 @@ const IndexPage = (props) => {
 						<a
 							href={item.url}
 							className='p-1.5 text-2xl 2xl:text-3xl inline-block magnetic hover:text-cobalt-50 hover:bg-cobalt-500 rounded-full transition-colors'
-							data-strength='20'
-							data-strength-text='10'
+							data-strenght='20'
+							data-strenght-text='10'
 							key={`headerSocialItems-${index}`}
 							target="_blank"
 							rel="noreferrer"
@@ -251,7 +256,6 @@ const IndexPage = (props) => {
 									<SingleWork
 										key={work.id}
 										work={work}
-										language={language}
 										linkClasses={`xl:py-16 xl:px-16 2xl:px-24`}
 										clazzName={`md:w-1/2 md:px-4 xl:px-0 xl:w-full`}
 									>
@@ -265,7 +269,7 @@ const IndexPage = (props) => {
 										<div className='xl:flex items-center justify-between'>
 											<h3
 												style={{ willChange: 'opacity, transform' }}
-												className='inline-block text-2xl md:text-3xl lg:text-4xl xl:text-7xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-8 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
+												className='inline-block text-2xl md:text-3xl lg:text-4xl xl:text-7xl pt-6 mb-0 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-8 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
 											<hr className='mt-3 mb-3 md:mb-6 xl:mb-0 xl:hidden border-zinc-400 dark:border-slate-600' />
 											<span
 												style={{ willChange: 'opacity, transform' }}
@@ -279,7 +283,7 @@ const IndexPage = (props) => {
 							<hr className='hidden xl:block w-full border-slate-500 dark:border-zinc-500' />
 						</ul>
 						<div className='flex justify-center pt-2 md:pt-8 xl:pt-20'>
-							<Link to={'/' + language + '/work'} className='group button-outline magnetic'
+							<Link to={'/' + lang + '/work'} className='group button-outline magnetic'
 								data-strenght='50'
 								data-text-strenght='20'>
 								<span className="magnetic-text flex">
@@ -294,12 +298,12 @@ const IndexPage = (props) => {
 
 			{/* work grid */}
 
-			<div className='work-grid hidden sm:block relative py-6 lg:py-16'>
+			<div className='work-grid overflow-hidden hidden sm:block relative py-6 lg:py-16'>
 				<div style={{ width: '120%', marginLeft: '-2%' }}>
 					<div className="flex last-work-grid" style={{ willChange: 'transform' }}>
 						{imagesGrid.map((item, index) => {
 							return (
-								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3`}>
+								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3 aspect-[5/3]`}>
 									{item.gatsbyImageData ?
 										<GatsbyImage
 											className='item-loading w-full h-full relative transition-all'
@@ -314,11 +318,12 @@ const IndexPage = (props) => {
 						})}
 					</div>
 				</div>
+
 				<div style={{ width: '120%', marginLeft: '-18%' }}>
 					<div className="flex last-work-grid-second" style={{ willChange: 'transform' }}>
-						{imagesGrid.map((item, index) => {
+						{imagesSecondGrid.map((item, index) => {
 							return (
-								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3`}>
+								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3 aspect-[5/3]`}>
 									{item.gatsbyImageData ?
 										<GatsbyImage
 											className='item-loading w-full h-full relative transition-all'
@@ -331,6 +336,56 @@ const IndexPage = (props) => {
 								</div>
 							)
 						})}
+					</div>
+				</div>
+			</div>
+
+			<div className='py-6 lg:py-16 lg:pb-20'>
+				<div className='container'>
+					<div className='relative'>
+						<h2 className='h2 mb-10'>{intl.formatMessage({ id: "recent_articles" })}</h2>
+						<ul className='flex flex-wrap -mx-8 lg:-mx-12'>
+							{posts.map((item, index) => {
+								const formated = dateFormat(item.date, lang)
+								const { timeToRead } = item.contentMd.childMarkdownRemark
+								const enRead = `${lang === 'en' ? formated.enDate : formated.ukDate} • ${timeToRead} min read`
+								const ukRead = `${lang === 'en' ? formated.enDate : formated.ukDate} • читати ${timeToRead} ${declOfNum(timeToRead, ['хвилину', 'хвилини', 'хвилин'])}`
+								return (
+									<FadeInAnimation
+										elem='li'
+										direction='up'
+										delay={(index % 2 === 0) ? index : (index * 0.15)}
+										delayFrom={768}
+										key={item.id}
+										className='block w-full md:w-1/2 mb-8 md:mb-12 px-4'>
+										<article className='relative overflow-hidden p-4 lg:p-6 xl:p-8 bg-white dark:shadow-md dark:bg-gray-800 h-full rounded-md lg:rounded-lg'>
+											<Link className='group' to={item.path}>
+												<div className='flex items-center text-sm md:text-base text-zinc-500 dark:text-zinc-400'>
+													<span>{lang === 'en' ? enRead : ukRead}</span>
+												</div>
+												<h2 className='h3 text-xl md:text-2xl font-medium mt-1 mb-3 leading-tight group-hover:text-cobalt-500 dark:group-hover:text-cobalt-400 transition-colors duration-500'>{item.title}</h2>
+												<div className='md:text-lg text-zinc-600 dark:text-gray-300' dangerouslySetInnerHTML={{ __html: item.description.childMarkdownRemark.html }}></div>
+												<div className='flex items-center mt-4 font-medium'>
+													<span>{intl.formatMessage({ id: "read_more" })}</span>
+													<BsArrowRightShort className='text-xl ml-1 group-hover:translate-x-1 transition-transform' />
+												</div>
+											</Link>
+
+										</article>
+									</FadeInAnimation>
+								)
+							})}
+						</ul>
+						<div className='flex justify-center pt-2 md:pt-8'>
+							<Link to={`/${lang}/articles`} className='group button-outline magnetic'
+								data-strenght='50'
+								data-text-strenght='20'>
+								<span className="magnetic-text flex">
+									<span className='relative'>{intl.formatMessage({ id: "more_work" })}<sup>{data.allContentfulBlogPost.totalCount}</sup></span>
+									<BsArrowRightShort className='button-icon' />
+								</span>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -349,6 +404,31 @@ export const query = graphql`
 				instagramLink
 				githubLink
 				facebookLink
+			}
+		}
+		allContentfulBlogPost(
+			filter: {node_locale: {eq: $language}}
+			limit: 2
+			sort: {order: DESC, fields: date}
+			) {
+			totalCount
+			nodes {
+				id
+				path
+				title
+				date
+				node_locale
+				contentMd {
+					childMarkdownRemark {
+						timeToRead
+					}
+				}
+				description {
+					childMarkdownRemark {
+						html
+						timeToRead
+					}
+				}
 			}
 		}
 		allContentfulHomePage(filter: {node_locale: {eq: $language}}) {
@@ -384,6 +464,12 @@ export const query = graphql`
 					}
 				}
 				imagesGrid {
+					id
+					gatsbyImageData
+					description
+					url
+				}
+				imagesSecondGrid {
 					id
 					gatsbyImageData
 					description

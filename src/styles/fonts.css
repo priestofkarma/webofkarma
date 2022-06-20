@@ -21,3 +21,19 @@
 	src: url("/fonts/Mariupol/Mariupol-Bold.woff") format("woff"), url("/fonts/Mariupol/Mariupol-Bold.woff2") format("woff2");
 	font-display: swap;
 }
+
+@font-face {
+	font-family: NotoSansMono;
+	font-weight: 400;
+	font-style: normal;
+	src: url("/fonts/NotoSansMono/NotoSansMono-Regular.woff") format("woff");
+	font-display: swap;
+}
+
+@font-face {
+	font-family: NotoSansMono;
+	font-weight: 700;
+	font-style: normal;
+	src: url("/fonts/NotoSansMono/NotoSansMono-Bold.woff") format("woff");
+	font-display: swap;
+}

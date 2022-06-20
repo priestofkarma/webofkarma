@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { Link } from 'gatsby'
+import { useIntl } from "gatsby-plugin-intl"
 
-const SingleWork = ({ dataService, work, language, clazzName, linkClasses, children }) => {
-
+const SingleWork = ({ dataService, work, clazzName, linkClasses, children }) => {
+	const intl = useIntl()
+	const lang = intl.locale
 	const workRef = useRef()
 	useEffect(() => {
 		const work = workRef.current;
@@ -44,7 +46,7 @@ const SingleWork = ({ dataService, work, language, clazzName, linkClasses, child
 			<hr className='hidden xl:block border-slate-500 dark:border-zinc-500' />
 			<Link
 				ref={workRef}
-				to={`/${language}/${work.path}`}
+				to={`/${lang}/work/${work.path}`}
 				className={`work group block pb-12 ${linkClasses}`}>
 				{children}
 			</Link>

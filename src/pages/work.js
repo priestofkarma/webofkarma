@@ -7,10 +7,9 @@ import { FaAlignJustify, FaThLarge } from 'react-icons/fa'
 import LetsWork from '../components/lets-work'
 import SingleWork from '../components/work-component'
 
-const WorkPage = (props) => {
-	const { language } = props.pageContext
-	const { data } = props
+const WorkPage = ({ data }) => {
 	const intl = useIntl()
+	const lang = intl.locale
 	const { myWorksTitle, seoTitle, seoDescription, seoImage } = data.allContentfulWorkPage.nodes[0]
 	const seo = {
 		title: seoTitle,
@@ -73,9 +72,9 @@ const WorkPage = (props) => {
 	}
 
 	return (
-		<Layout seo={seo} pageProps={props}>
+		<Layout seo={seo}>
 
-			<section className='pt-32 lg:pt-48 pb-10 md:pb-16 lg:pb-28 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800'>
+			<section className='pt-32 lg:pt-48 pb-10 md:pb-16 lg:pb-28 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900'>
 				<div className="container">
 					<div className='relative max-w-5xl 2xl:max-w-7xl mx-auto'>
 						<h2 className='h1 mb-4 xl:mb-10 2xl:-ml-2 xl:text-7xl 2xl:text-8xl'>{myWorksTitle}</h2>
@@ -133,7 +132,6 @@ const WorkPage = (props) => {
 										<SingleWork
 											key={work.id}
 											work={work}
-											language={language}
 											linkClasses={`xl:py-8 xl:px-28 2xl:px-32`}
 											clazzName={`${dataServices} work-item overflow-hidden md:w-1/2 md:px-4 xl:px-0 xl:w-full `}>
 											<div
@@ -146,7 +144,7 @@ const WorkPage = (props) => {
 											<div className='xl:flex items-center'>
 												<h3
 													style={{ willChange: 'opacity, transform' }}
-													className='inline-block w-4/12 text-2xl md:text-3xl lg:text-4xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-4 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
+													className='inline-block mb-0 w-4/12 text-2xl md:text-3xl lg:text-4xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-4 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
 												<hr className='mt-3 mb-3 md:mb-6 xl:mb-0 xl:hidden border-zinc-400 dark:border-slate-600' />
 												<span
 													style={{ willChange: 'opacity, transform' }}
@@ -180,7 +178,7 @@ const WorkPage = (props) => {
 									<li key={work.id}
 										className={`${dataServices} work-item overflow-hidden md:w-1/2 md:px-4 xl:px-6`}>
 										<Link
-											to={`/${language}/${work.path}`}
+											to={`/${lang}/work/${work.path}`}
 											className={`group block pb-12`}>
 											<div
 												className="w-full overflow-hidden z-10">

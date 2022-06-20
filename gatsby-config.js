@@ -18,17 +18,64 @@ module.exports = {
 		},
 		"gatsby-plugin-image",
 		"gatsby-plugin-react-helmet",
-		"gatsby-transformer-remark",
+		// "gatsby-transformer-remark",
+		"gatsby-plugin-sass",
 		"gatsby-plugin-postcss",
+		"gatsby-plugin-sharp",
+		"gatsby-transformer-sharp",
 		"gatsby-plugin-sitemap", {
 			resolve: 'gatsby-plugin-manifest',
 			options: {
 				"icon": "src/images/icon.png"
 			}
 		},
-		"gatsby-plugin-mdx",
-		"gatsby-plugin-sharp",
-		"gatsby-transformer-sharp",
+		{
+			resolve: `gatsby-transformer-remark`,
+			options: {
+				plugins: [
+					`gatsby-remark-prismjs-copy-button`,
+					{
+						resolve: 'gatsby-remark-prismjs',
+						options: {
+							classPrefix: "language-",
+							aliases: {},
+							showLineNumbers: false,
+							noInlineHighlight: false,
+							prompt: {
+								user: "root",
+								host: "localhost",
+								global: false,
+							},
+							escapeEntities: {},
+						},
+					}
+				],
+			},
+		},
+		/* {
+			resolve: `gatsby-plugin-mdx`,
+			options: {
+				gatsbyRemarkPlugins: [
+					"gatsby-remark-prismjs-copy-button",
+					{
+						resolve: 'gatsby-remark-prismjs',
+						options: {
+							classPrefix: "language-",
+							inlineCodeMarker: null,
+							aliases: {},
+							showLineNumbers: true,
+							noInlineHighlight: true,
+							prompt: {
+								user: "root",
+								host: "localhost",
+								global: false,
+							},
+							escapeEntities: {},
+						},
+					},
+				],
+			},
+		}, */
 		{
 			resolve: `gatsby-plugin-intl`,
 			options: {

@@ -9,11 +9,10 @@ import FadeInAnimation from '../components/FadeInAnimation'
 import { BsArrowRightShort } from 'react-icons/bs'
 import WhatMedia from '../components/what-media'
 
-const SingleWork = (props) => {
+const SingleWork = ({ data, pageContext }) => {
 	const intl = useIntl()
-	const { data } = props
+	const lang = intl.locale
 	const nextWorkRef = useRef();
-	console.log(data.allContentfulSingleWork.totalCount)
 	const {
 		workName,
 		services,
@@ -41,7 +40,7 @@ const SingleWork = (props) => {
 		image: heroImage.url
 	}
 
-	const nextWork = props.pageContext.next.node
+	const nextWork = pageContext.next.node
 
 	/* block order - [iMac, MacBook, iPad, iPhone, First Media, Second Media] */
 	const order = {
@@ -106,9 +105,9 @@ const SingleWork = (props) => {
 		gsap.from(nextWorkImage, {
 			scrollTrigger: {
 				trigger: nextWorkRef.current,
-				start: "20% bottom",
-				end: "130% bottom",
-				scrub: true
+				start: "40% bottom",
+				end: "120% bottom",
+				scrub: 1
 			},
 			yPercent: 70,
 			ease: 'none',
@@ -116,7 +115,7 @@ const SingleWork = (props) => {
 	}, [])
 
 	return (
-		<Layout pageProps={props} seo={seo}>
+		<Layout seo={seo}>
 			<div>
 				<div className='pt-32 lg:pt-48 pb-10 md:pb-16 lg:pb-28 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800'>
 					<div className="container">
@@ -294,7 +293,7 @@ const SingleWork = (props) => {
 				ref={nextWorkRef}>
 				<div className="container">
 					<Link className='group max-w-screen-sm mx-auto relative block'
-						to={'/' + props.pageContext.language + '/' + nextWork.path}>
+						to={'/' + lang + '/work/' + nextWork.path}>
 						<div className='overflow-hidden flex flex-col items-center'>
 							<div>
 								<p className='mb-2 xl:mb-6'>{intl.formatMessage({ id: "next_case" })}</p>
@@ -302,14 +301,16 @@ const SingleWork = (props) => {
 							</div>
 							<div
 								className='next-work-image w-10/12 max-w-sm'
-								style={{willChange: 'transform'}}
-								>
-								<img className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out' src={nextWork.previewImage.url} alt={nextWork.previewImage.title} />
+								style={{ willChange: 'transform' }}
+							>
+								<img className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out'
+									src={nextWork.previewImage.url}
+									alt={nextWork.previewImage.title} />
 							</div>
 						</div>
 						<hr className='w-full mb-8 border-zinc-600' />
 					</Link>
-					<Link to={`/${props.pageContext.language}/work`}
+					<Link to={`/${lang}/work`}
 						className='magnetic button-outline border-zinc-600 justify-center w-full sm:w-auto'>
 						<span className='magnetic-text relative flex'>
 							{intl.formatMessage({ id: "all_work" })}

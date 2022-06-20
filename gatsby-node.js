@@ -3,9 +3,10 @@ const path = require(`path`)
 exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions
 	const singleWorkTemplate = path.resolve(`src/templates/single-work.js`)
+	const singlePostTemplate = path.resolve(`src/templates/single-post.js`)
 
 	return graphql(`
-		query singleWorkQuery {
+		query {
 			allContentfulSingleWork {
 				edges {
 					node {
@@ -13,6 +14,19 @@ exports.createPages = ({ graphql, actions }) => {
 						path
 						workName
 						previewImage {
+							url
+							title
+						}
+					}
+				}
+			}
+			allContentfulBlogPost {
+				edges {
+					node {
+						id
+						title
+						path
+						image {
 							url
 							title
 						}
@@ -32,8 +46,26 @@ exports.createPages = ({ graphql, actions }) => {
 			const next = index === works.length - 1 ? null : works[index + 1];
 		
 			createPage({
-				path: pagePath,
+				path: `work/${pagePath}`,
 				component: singleWorkTemplate,
+				context: {
+					id: edge.node.id,
+					slug: pagePath,
+					prev,
+					next
+				},
+			})
+		})
+		
+		result.data.allContentfulBlogPost.edges.forEach((edge, index) => {
+			const posts = result.data.allContentfulBlogPost.edges;
+			const pagePath = edge.node.path
+			const prev = index === 0 ? null : posts[index - 1];
+			const next = index === posts.length - 1 ? null : posts[index + 1];
+		
+			createPage({
+				path: `articles/${pagePath}`,
+				component: singlePostTemplate,
 				context: {
 					id: edge.node.id,
 					slug: pagePath,
