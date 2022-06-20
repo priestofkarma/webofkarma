@@ -76,7 +76,7 @@ const IndexPage = ({ data }) => {
 	return (
 		<Layout seo={seo}>
 			<section
-				className='hero relative bg-no-repeat bg-left-top md:bg-left-bottom bg-cover'
+				className='hero overflow-hidden relative bg-no-repeat bg-left-top md:bg-left-bottom bg-cover'
 				style={{
 					backgroundImage: `url('${heroBg}')`,
 				}}>
@@ -250,7 +250,7 @@ const IndexPage = ({ data }) => {
 						<h2 className='h2'>{intl.formatMessage({ id: "recent_work" })}</h2>
 						<ul
 							className='flex flex-wrap md:-mx-4 xl:-mx-16 2xl:-mx-24'>
-							{data.allWork.nodes.slice(0, 4).map((work, index) => {
+							{data.allWork.nodes.map((work) => {
 								const services = work.services.join(" & ");
 								return (
 									<SingleWork
@@ -340,11 +340,11 @@ const IndexPage = ({ data }) => {
 				</div>
 			</div>
 
-			<div className='py-6 lg:py-16 lg:pb-20'>
-				<div className='container'>
+			<div className='py-6 pb-10 lg:py-16 lg:pb-20'>
+				<div className='container max-w-screen-lg'>
 					<div className='relative'>
 						<h2 className='h2 mb-10'>{intl.formatMessage({ id: "recent_articles" })}</h2>
-						<ul className='flex flex-wrap -mx-8 lg:-mx-12'>
+						<ul className='flex flex-wrap -mx-8 lg:-mx-12 xl:-mx-20'>
 							{posts.map((item, index) => {
 								const formated = dateFormat(item.date, lang)
 								const { timeToRead } = item.contentMd.childMarkdownRemark
@@ -381,7 +381,7 @@ const IndexPage = ({ data }) => {
 								data-strenght='50'
 								data-text-strenght='20'>
 								<span className="magnetic-text flex">
-									<span className='relative'>{intl.formatMessage({ id: "more_work" })}<sup>{data.allContentfulBlogPost.totalCount}</sup></span>
+									<span className='relative'>{intl.formatMessage({ id: "more_articles" })}<sup>{data.allContentfulBlogPost.totalCount}</sup></span>
 									<BsArrowRightShort className='button-icon' />
 								</span>
 							</Link>
@@ -477,7 +477,7 @@ export const query = graphql`
 				}
 			}
 		}
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date, order: DESC}) {
+		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } limit: 4 sort: {fields: date, order: DESC}) {
 			totalCount
 			nodes {
 				id

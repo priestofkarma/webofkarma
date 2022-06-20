@@ -30,7 +30,7 @@ const Contact = ({ data }) => {
 								href={`mailto:${email}`}>{email}</a>
 
 							<h5 className='text-zinc-400 text-xs mb-1 mt-6 md:mt-10 md:text-sm'>{intl.formatMessage({ id: "social" })}</h5>
-							<div className='-mx-2 mb-8 flex flex-row md:flex-col items-start md:text-lg'>
+							<div className='-mx-2 mb-8 flex flex-row flex-wrap md:flex-col items-start md:text-lg'>
 								{social.map((item, index) => (
 									<a
 										href={item.url}

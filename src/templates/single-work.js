@@ -191,7 +191,7 @@ const SingleWork = ({ data, pageContext }) => {
 					</div>
 				</div>
 
-				<div className="content flex flex-col">
+				<div className="content overflow-hidden flex flex-col">
 
 					{macbookMedia && <div className={`order-${order.macbook} py-10 md:py-16 lg:py-28 bg-gradient-to-b from-zinc-100 to-zinc-50 dark:from-zinc-800 dark:to-zinc-900`}>
 						<div className='block-device device-mbp'>
