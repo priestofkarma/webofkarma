@@ -41,6 +41,7 @@ const SinglePost = ({ data, pageContext }) => {
 		toWrap('table', 'table-wrap');
 		toWrap('iframe', 'iframe-wrap');
 		toWrap('video', 'video-wrap');
+		toWrap('.code-block', 'code-block-wrapper');
 
 		const headersSelector = '.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6';
 		tableOfContents({
@@ -97,6 +98,23 @@ const SinglePost = ({ data, pageContext }) => {
 			}
 		})
 
+		/* copy code btn */
+		const copyCodeBtn = document.querySelectorAll('.copy-code-btn');
+		const tooltipText = lang === 'en' ? 'Copy code' : 'Копіювати код';
+		if (copyCodeBtn) {
+			copyCodeBtn.forEach(item => {
+				item.setAttribute('data-tooltip', tooltipText)
+			})
+		}
+		const copyCodeToaster = document.querySelectorAll('.copy-code-container');
+		const toasterText = lang === 'en' ? 'Copied!' : 'Скопійовано!';
+		if (copyCodeToaster) {
+			copyCodeToaster.forEach(item => {
+				item.setAttribute('data-toaster-text', toasterText)
+			})
+		}
+
+
 		const nextPostImage = nextPostRef.current.querySelector('.next-post-image')
 		gsap.from(nextPostImage, {
 			scrollTrigger: {
@@ -116,8 +134,8 @@ const SinglePost = ({ data, pageContext }) => {
 
 	return (
 		<Layout seo={seo}>
-			<div className='overflow-hidden dark:text-slate-200 lg:overflow-initial pb-10 md:pb-16 lg:pb-28 bg-zinc-100 dark:bg-slate-900'>
-				<div className='relative pt-32 lg:pt-48 pb-10 lg:pb-16 bg-slate-300 dark:bg-slate-800'>
+			<div className='overflow-hidden dark:text-slate-200 lg:overflow-initial pb-10 md:pb-16 lg:pb-28 bg-gray-50 dark:bg-slate-900'>
+				<div className='relative pt-32 lg:pt-48 pb-10 bg-slate-200 dark:bg-slate-800'>
 					<div className="container px-6 xl:px-20">
 						<div className='relative lg:w-9/12 xl:w-8/12'>
 							<h1 className='h1 text-black dark:text-white mb-2 xl:mb-4 text-2xl xl:text-5xl font-medium'>{title}</h1>
@@ -126,7 +144,7 @@ const SinglePost = ({ data, pageContext }) => {
 					</div>
 				</div>
 				<div className='container px-6 xl:px-20'>
-					<div ref={postContentRef} className='flex flex-wrap pt-10 lg:pt-20'>
+					<div ref={postContentRef} className='flex flex-wrap pt-10 lg:pt-20 xl:pt-28'>
 						<article className='relative w-full lg:w-9/12 xl:w-8/12 post-content lg:text-lg xl:text-xl 2xl:text-xl'
 							dangerouslySetInnerHTML={{ __html: contentMd.childMarkdownRemark.html }}></article>
 						<aside ref={asideRef}

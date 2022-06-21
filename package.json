@@ -8,6 +8,7 @@
     "gatsby"
   ],
   "scripts": {
+	"theme": "cd ./node_modules/github-vscode-theme && npm i && npm run build",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
@@ -29,12 +30,15 @@
     "gatsby-plugin-sass": "^5.16.0",
     "gatsby-plugin-sharp": "^4.13.0",
     "gatsby-plugin-sitemap": "^5.13.0",
+    "gatsby-remark-code-buttons": "^2.0.7",
     "gatsby-remark-prismjs": "^6.16.0",
     "gatsby-remark-prismjs-copy-button": "^0.3.1",
+    "gatsby-remark-vscode": "^3.3.1",
     "gatsby-source-contentful": "^7.11.0",
     "gatsby-source-filesystem": "^4.13.0",
     "gatsby-transformer-remark": "^5.13.0",
     "gatsby-transformer-sharp": "^4.13.0",
+    "github-vscode-theme": "^6.0.0",
     "gsap": "^3.10.4",
     "prismjs": "^1.28.0",
     "react": "^17.0.1",
@@ -43,7 +47,8 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
     "sass": "^1.52.3",
-    "sharp": "^0.30.4"
+    "sharp": "^0.30.4",
+    "synthwave-vscode": "github:robb0wen/synthwave-vscode"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

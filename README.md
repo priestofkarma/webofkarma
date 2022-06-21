@@ -4,6 +4,17 @@
 
 ## 🚀 Quick start
 
+0.  **Create a theme site.**
+
+ 	```shell
+    # Install packages (maybe gatsby-plugin-intl need install with --legacy-peer-deps)
+    npm run theme
+    ```
+
+	https://www.npmjs.com/package/github-vscode-theme
+	
+	https://github.com/andrewbranch/gatsby-remark-vscode#using-languages-and-themes-from-an-extension
+
 1.  **Create a Gatsby site.**
 
     Use the Gatsby CLI to create a new site, specifying the minimal starter.

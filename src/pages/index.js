@@ -359,7 +359,7 @@ const IndexPage = ({ data }) => {
 										key={item.id}
 										className='block w-full md:w-1/2 mb-8 md:mb-12 px-4'>
 										<article className='relative overflow-hidden p-4 lg:p-6 xl:p-8 bg-white dark:shadow-md dark:bg-gray-800 h-full rounded-md lg:rounded-lg'>
-											<Link className='group' to={item.path}>
+											<Link className='group' to={`/${lang}/articles/${item.path}`}>
 												<div className='flex items-center text-sm md:text-base text-zinc-500 dark:text-zinc-400'>
 													<span>{lang === 'en' ? enRead : ukRead}</span>
 												</div>
