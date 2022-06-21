@@ -6,11 +6,20 @@ import ContactForm from '../components/contact-form'
 import getSocialItems from '../utils/getSocialItems'
 
 const Contact = ({ data }) => {
-	const seo = {};
 	const intl = useIntl()
 	const {
 		pageTitle,
+		seoTitle,
+		seoDescription,
+		seoImage
 	} = data.allContentfulContactPage.nodes[0]
+
+	const seo = {
+		title: seoTitle,
+		description: seoDescription.seoDescription,
+		image: seoImage.url
+	};
+
 	const { email } = data.allContentfulSiteMetadata.nodes[0]
 	const social = getSocialItems(data.allContentfulSocialLinks.nodes[0])
 
@@ -79,6 +88,14 @@ export const query = graphql`
 		}
 		allContentfulContactPage(filter: {node_locale: {eq: $language}}) {
 			nodes {
+				node_locale
+				seoTitle
+				seoDescription {
+					seoDescription
+				}
+				seoImage {
+					url
+				}
 				pageTitle
 				nameFieldLabel
 				nameFieldPlaceholder

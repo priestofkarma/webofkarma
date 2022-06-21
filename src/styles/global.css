@@ -864,6 +864,10 @@ sup {
 	/* box-shadow: 0 25px 45px 0px rgba(0, 0, 0, 0.1); */
 }
 
+.dark .code-block {
+	color: inherit;
+}
+
 .grvsc-code {
 	width: 100%;
 }
@@ -949,6 +953,7 @@ pre[data-language="bash"]:before {
 	color: #fff;
 }
 
+pre[data-language="plain text"]:before,
 pre[data-language="text"]:before {
 	content: "Text" !important;
 	background-color: #ececec;

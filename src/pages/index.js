@@ -407,7 +407,7 @@ export const query = graphql`
 			}
 		}
 		allContentfulBlogPost(
-			filter: {node_locale: {eq: $language}}
+			filter: {node_locale: {eq: $language}} 
 			limit: 2
 			sort: {order: DESC, fields: date}
 			) {

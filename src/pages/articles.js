@@ -42,7 +42,7 @@ const Articles = ({ data }) => {
 										<FadeInAnimation
 											elem='li'
 											direction='up'
-											delay={(index % 2 === 0) ? index : (index * 0.15)}
+											delay={(index % 2 === 0) ? 0.1 : 0.15}
 											delayFrom={768}
 											key={item.id}
 											className='block w-full md:w-1/2 mb-8 md:mb-12 px-4'>
@@ -87,7 +87,7 @@ export const query = graphql`
 			}
 		}
 		allContentfulBlogPost(
-		filter: {node_locale: {eq: $language}}
+		filter: {node_locale: {eq: $language}} 
 		sort: {order: DESC, fields: date}
 		) {
 			totalCount

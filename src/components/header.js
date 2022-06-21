@@ -61,7 +61,7 @@ const Header = ({ social, onToggleTheme, theme }) => {
 	const navLinks = [
 		{ href: `/work`, label: 'works', count: data.allContentfulSingleWork.totalCount / 2 },
 		{ href: `/articles`, label: 'articles', count: data.allContentfulBlogPost.totalCount / 2 },
-		{ href: `/library`, label: 'library' },
+		{ href: `/articles/library`, label: 'library' },
 		{ href: `/about`, label: 'about' },
 		{ href: `/contact`, label: 'contact' },
 	];
