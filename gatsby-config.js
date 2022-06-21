@@ -5,8 +5,8 @@ require("dotenv").config({
 module.exports = {
 	siteMetadata: {
 		title: `Webofkarma`,
-		author: `Zhenya Petrenko <priestofkarma@gmail.com>`,
-		siteUrl: `https://webofkarmamaster.gtsb.io/`
+		author: `Zhenya Petrenko <hello@webofkarma.com.ua>`,
+		siteUrl: `https://webofkarma.com.ua/`
 	},
 	plugins: [
 		{
@@ -18,7 +18,6 @@ module.exports = {
 		},
 		"gatsby-plugin-image",
 		"gatsby-plugin-react-helmet",
-		// "gatsby-transformer-remark",
 		"gatsby-plugin-sass",
 		"gatsby-plugin-postcss",
 		"gatsby-plugin-sharp",
@@ -68,50 +67,9 @@ module.exports = {
 							},
 						}
 					},
-					/* or with prismjs */
-					// `gatsby-remark-prismjs-copy-button`,
-					/* {
-						resolve: 'gatsby-remark-prismjs',
-						options: {
-							classPrefix: "language-",
-							aliases: {},
-							showLineNumbers: false,
-							noInlineHighlight: false,
-							prompt: {
-								user: "root",
-								host: "localhost",
-								global: false,
-							},
-							escapeEntities: {},
-						},
-					} */
 				],
 			},
 		},
-		/* {
-			resolve: `gatsby-plugin-mdx`,
-			options: {
-				gatsbyRemarkPlugins: [
-					"gatsby-remark-prismjs-copy-button",
-					{
-						resolve: 'gatsby-remark-prismjs',
-						options: {
-							classPrefix: "language-",
-							inlineCodeMarker: null,
-							aliases: {},
-							showLineNumbers: true,
-							noInlineHighlight: true,
-							prompt: {
-								user: "root",
-								host: "localhost",
-								global: false,
-							},
-							escapeEntities: {},
-						},
-					},
-				],
-			},
-		}, */
 		{
 			resolve: `gatsby-plugin-intl`,
 			options: {

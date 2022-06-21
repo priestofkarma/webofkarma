@@ -23,7 +23,7 @@ const Articles = ({ data }) => {
 
 	
 	return (
-		<Layout>
+		<Layout seo={seo}>
 			<div className='pt-32 lg:pt-48 pb-10 md:pb-16 lg:pb-10 bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900'>
 				<div className='container max-w-screen-lg'>
 					<div>

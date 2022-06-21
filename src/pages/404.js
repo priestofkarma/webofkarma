@@ -1,53 +1,38 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import { useIntl } from "gatsby-plugin-intl"
+import Layout from "../components/layout"
+import { FiArrowUpLeft } from 'react-icons/fi'
 
-// styles
-const pageStyles = {
-	color: "#232129",
-	padding: "96px",
-	fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-	marginTop: 0,
-	marginBottom: 64,
-	maxWidth: 320,
-}
-
-const paragraphStyles = {
-	marginBottom: 48,
-}
-const codeStyles = {
-	color: "#8A6534",
-	padding: 4,
-	backgroundColor: "#FFF4DB",
-	fontSize: "1.25rem",
-	borderRadius: 4,
-}
-
-// markup
 const NotFoundPage = () => {
+	const intl = useIntl()
+	const lang = intl.locale
+	const seo = {
+		title: '404: Not found',
+	}
 	return (
-		<main style={pageStyles}>
-			<title>Not found</title>
-			<h1 style={headingStyles}>Page not found</h1>
-			<p style={paragraphStyles}>
-				Sorry{" "}
-				<span role="img" aria-label="Pensive emoji">
-					😔
-				</span>{" "}
-				we couldn’t find what you were looking for.
-				<br />
-				{process.env.NODE_ENV === "development" ? (
-					<>
+		<Layout seo={seo}>
+			<div className='pt-32 lg:pt-44 pb-16 lg:pb-16'>
+				<div className='container px-4 max-w-screen-sm'>
+					<div>
+						<h1 className='h1 text-6xl sm:text-8xl font-medium'>{intl.formatMessage({ id: "error_title" })}</h1>
+						<p className='text-3xl mb-10'>
+							{intl.formatMessage({ id: "error_text" })}.
+							{process.env.NODE_ENV === "development" ? (
+								<>
+									<br />
+									Try creating a page in <code>src/pages/</code>.
+									<br />
+								</>
+							) : null}
+						</p>
 						<br />
-						Try creating a page in <code style={codeStyles}>src/pages/</code>.
-						<br />
-					</>
-				) : null}
-				<br />
-				<Link to="/">Go home</Link>.
-			</p>
-		</main>
+						<Link to={`/${lang}/`}
+							className='text-amber-500 inline-flex items-center text-3xl'><FiArrowUpLeft className='mr-2' /><span>{intl.formatMessage({ id: "back_home" })}</span></Link>
+					</div>
+				</div>
+			</div>
+		</Layout>
 	)
 }
 

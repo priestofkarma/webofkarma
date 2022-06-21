@@ -7,9 +7,6 @@ const applyModeClass = `
 		const mode = (localStorage.theme === 'dark') || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
 		document.documentElement.classList.add(mode);
 		localStorage.setItem('theme', mode);
-		/* if (('isPreloaderShown' in localStorage)) {
-			document.getElementById('preloader').remove()
-		} */
 	} catch (e) {}
 	})();
 `;
@@ -39,6 +36,22 @@ export const onRenderBody = ({ setHeadComponents }) => {
 			key="mariupol-bold"
 			rel="preload"
 			href="/fonts/Mariupol/Mariupol-Bold.woff"
+			as="font"
+			type="font/woff"
+			crossOrigin="anonymous"
+		/>,
+		<link
+			key="NotoSansMono-regular"
+			rel="preload"
+			href="/fonts/NotoSansMono/NotoSansMono-Regular.woff"
+			as="font"
+			type="font/woff"
+			crossOrigin="anonymous"
+		/>,
+		<link
+			key="NotoSansMono-bold"
+			rel="preload"
+			href="/fonts/NotoSansMono/NotoSansMono-Bold.woff"
 			as="font"
 			type="font/woff"
 			crossOrigin="anonymous"

@@ -37,5 +37,8 @@
 	"articles": "Articles",
 	"toc": "Table of contents",
 	"contact_lead": "Let’s work together",
-	"all_rights": "All rights reserved"
+	"all_rights": "All rights reserved",
+	"error_title": "Not found",
+	"error_text": "Sorry, there is nothing at this URL.",
+	"back_home": "Go back home"
 }

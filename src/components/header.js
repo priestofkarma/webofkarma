@@ -62,7 +62,7 @@ const Header = ({ social, onToggleTheme, theme }) => {
 		{ href: `/work`, label: 'works', count: data.allContentfulSingleWork.totalCount / 2 },
 		{ href: `/articles`, label: 'articles', count: data.allContentfulBlogPost.totalCount / 2 },
 		{ href: `/library`, label: 'library' },
-		// { href: `/about`, label: 'about' },
+		{ href: `/about`, label: 'about' },
 		{ href: `/contact`, label: 'contact' },
 	];
 
@@ -85,17 +85,17 @@ const Header = ({ social, onToggleTheme, theme }) => {
 					className='menu fixed translate-x-full right-0 top-0 h-screen w-screen max-w-lg text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-1000'
 					ref={menuRef}>
 
-					<div className="menu__container relative overflow-y-auto h-full">
+					<div className="menu__container relative overflow-y-auto overflow-x-hidden h-full">
 						<div className=" min-h-full px-8 pt-20 pb-10 sm:px-20 flex flex-col">
 
 							<div className="menu__item mt-auto mb-4">
 								<h5 className='text-zinc-400 text-xs md:text-sm'>{intl.formatMessage({ id: "navigation" })}</h5>
 								<hr className='mt-2 mb-4 border-zinc-400' />
 								<nav className='nav header__nav mb-4'>
-									<ul className='text-3xl xl:text-4xl 2xl:text-5xl pt-2 md:pt-6'>
+									<ul className='text-2xl sm:text-3xl xl:text-4xl 2xl:text-5xl pt-2 md:pt-6'>
 										{navLinks.map(({ href, label, count }) => {
 											return (
-												<li key={href} className='mb-4 2xl:mb-6'>
+												<li key={href} className='mb-2 sm:mb-4 2xl:mb-6'>
 													<Link to={'/' + lang + href}
 														data-strength="20"
 														className={`magnetic group inline-block relative hover:opacity-80 transition-colors`}>
@@ -156,16 +156,18 @@ const Header = ({ social, onToggleTheme, theme }) => {
 					</div>
 				</div>
 
-				<Link to={'/'+lang+'/'} aria-label="To homepage" className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 2xl:left-16'>
+				<Link to={'/' + lang + '/'}
+					aria-label="Homepage"
+					className='text-black dark:text-white inline-block absolute top-5 left-8 lg:left-8 lg:top-10 xl:top-12 2xl:left-16'>
 					<Logo clazzName='w-10 xl:w-12 2xl:w-16 -mt-1' />
 				</Link>
 
-				<div className={`fake-menu-btn absolute right-6 top-3 lg:right-12 lg:top-12`}>
+				<div className={`fake-menu-btn absolute right-4 top-3 md:right-2 md:top-1.5 lg:right-3 lg:top-8 xl:top-10`}>
 					<button
 						data-strenght='50'
-						className={`w-12 h-12 rounded-full duration-700 transition-colors magnetic`}
+						className={`w-16 h-12 md:w-20 md:h-16 lg:w-24 rounded-full duration-700 transition-colors magnetic`}
 						onClick={toggleMenu}>
-						<span className="link-dot"></span>
+						<span className="link-dot -left-1 lg:left-2"></span>
 						<span>{intl.formatMessage({ id: "menu" })}</span>
 					</button>
 				</div>
