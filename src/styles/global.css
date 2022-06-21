@@ -797,12 +797,12 @@ sup {
 
 .video-wrap.paused .pause-btn,
 .video-wrap .play-btn {
-	display: block;
+	display: none;
 }
 
 .video-wrap.paused .play-btn, 
 .video-wrap .pause-btn {
-	display: none;
+	display: block;
 }
 
 /* anchor header */
