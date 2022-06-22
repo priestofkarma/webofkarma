@@ -1,6 +1,8 @@
 import React from "react"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import { useIntl } from "gatsby-plugin-intl"
+import getLangContent from '../utils/getLangContent'
 
 const Seo = ({ theme, seo }) => {
 	const data = useStaticQuery(
@@ -8,19 +10,23 @@ const Seo = ({ theme, seo }) => {
 			query {
 				allContentfulSiteMetadata {
 					nodes {
-						siteUrl
+						node_locale
 						title
+						siteUrl
 						image {
 							url
 						}
+						keywords
 						description {
 							description
 						}
 					}
 				}
 			}
-		`)
-	const { description, title, image, lang = typeof window !== `undefined` ? localStorage.getItem('gatsby-intl-language') || 'en' : 'en', meta = [] } = data.allContentfulSiteMetadata.nodes[0];
+	`)
+	const intl = useIntl()
+	const lang = intl.locale
+	const { description, title, image, keywords, meta = [] } = getLangContent(lang, data.allContentfulSiteMetadata.nodes);
 	const metaTitle = (seo && seo.title) || title
 	const metaDescription = (seo && seo.description) || description.description
 	const metaImage = (seo && seo.image) || image.url
@@ -42,6 +48,7 @@ const Seo = ({ theme, seo }) => {
 				{
 					name: `description`,
 					content: metaDescription,
+					lang: lang
 				},
 				{
 					name: 'image',
@@ -54,6 +61,7 @@ const Seo = ({ theme, seo }) => {
 				{
 					property: `og:description`,
 					content: metaDescription,
+					lang: lang
 				},
 				{
 					property: `og:type`,
@@ -78,10 +86,16 @@ const Seo = ({ theme, seo }) => {
 				{
 					name: `twitter:description`,
 					content: metaDescription,
+					lang: lang
 				},
 				{
 					name: 'twitter:image',
 					content: metaImage,
+				},
+				{
+					name: 'keywords',
+					lang: lang,
+					content: keywords,
 				},
 			].concat(meta)}
 		/>

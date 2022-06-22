@@ -17,6 +17,7 @@ const SingleWork = ({ data, pageContext }) => {
 		workName,
 		services,
 		workDescription,
+		seoDescription,
 		credits,
 		location,
 		date,
@@ -36,8 +37,8 @@ const SingleWork = ({ data, pageContext }) => {
 
 	const seo = {
 		title: workName,
-		description: workDescription.workDescription,
-		image: heroImage.url
+		description: seoDescription && seoDescription.seoDescription,
+		image: heroImage && heroImage.url
 	}
 
 	const nextWork = pageContext.next.node
@@ -58,60 +59,68 @@ const SingleWork = ({ data, pageContext }) => {
 	useEffect(() => {
 
 		const parallax = document.querySelectorAll('.parallax');
-		parallax.forEach(item => {
-			let dataParallax = item.getAttribute('data-parallax') || 10;
-			const parallaxItem = item.querySelector('.parallax-item');
-			gsap.set(parallaxItem, { yPercent: -dataParallax, height: `${100 + (dataParallax * 2)}%` })
-			gsap.to(parallaxItem, {
+		if (parallax.length !== 0) {
+			parallax.forEach(item => {
+				let dataParallax = item.getAttribute('data-parallax') || 10;
+				const parallaxItem = item.querySelector('.parallax-item');
+				gsap.set(parallaxItem, { yPercent: -dataParallax, height: `${100 + (dataParallax * 2)}%` })
+				gsap.to(parallaxItem, {
+					scrollTrigger: {
+						trigger: parallaxItem,
+						start: "top bottom",
+						end: "bottom top",
+						scrub: true
+					},
+					yPercent: dataParallax,
+					ease: 'none',
+				});
+			});
+		}
+
+
+		const deviceIphone = document.querySelectorAll('.device-iphone');
+		const iphonesBlock = document.querySelectorAll('.iphones-block');
+		if (deviceIphone.length !== 0) {
+			gsap.set(deviceIphone[0], { yPercent: -15 })
+			gsap.to(deviceIphone[0], {
 				scrollTrigger: {
-					trigger: parallaxItem,
+					trigger: iphonesBlock,
 					start: "top bottom",
 					end: "bottom top",
 					scrub: true
 				},
-				yPercent: dataParallax,
+				yPercent: 15,
 				ease: 'none',
 			});
-		});
 
-		const deviceIphone = document.querySelectorAll('.device-iphone');
-		const iphonesBlock = document.querySelectorAll('.iphones-block');
+			gsap.set(deviceIphone[2], { yPercent: 15 })
+			gsap.to(deviceIphone[2], {
+				scrollTrigger: {
+					trigger: iphonesBlock,
+					start: "top bottom",
+					end: "bottom top",
+					scrub: true
+				},
+				yPercent: -15,
+				ease: 'none',
+			});
+		}
 
-		gsap.set(deviceIphone[0], { yPercent: -15 })
-		gsap.to(deviceIphone[0], {
-			scrollTrigger: {
-				trigger: iphonesBlock,
-				start: "top bottom",
-				end: "bottom top",
-				scrub: true
-			},
-			yPercent: 15,
-			ease: 'none',
-		});
-
-		gsap.set(deviceIphone[2], { yPercent: 15 })
-		gsap.to(deviceIphone[2], {
-			scrollTrigger: {
-				trigger: iphonesBlock,
-				start: "top bottom",
-				end: "bottom top",
-				scrub: true
-			},
-			yPercent: -15,
-			ease: 'none',
-		});
 
 		const nextWorkImage = nextWorkRef.current.querySelector('.next-work-image')
-		gsap.from(nextWorkImage, {
-			scrollTrigger: {
-				trigger: nextWorkRef.current,
-				start: "40% bottom",
-				end: "120% bottom",
-				scrub: 1
-			},
-			yPercent: 70,
-			ease: 'none',
-		});
+		if (nextWorkImage) {
+			gsap.from(nextWorkImage, {
+				scrollTrigger: {
+					trigger: nextWorkRef.current,
+					start: "40% bottom",
+					end: "120% bottom",
+					scrub: 1
+				},
+				yPercent: 70,
+				ease: 'none',
+			});
+		}
+
 	}, [])
 
 	return (
@@ -303,9 +312,11 @@ const SingleWork = ({ data, pageContext }) => {
 								className='next-work-image w-10/12 max-w-sm'
 								style={{ willChange: 'transform' }}
 							>
-								<img className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out'
-									src={nextWork.previewImage.url}
-									alt={nextWork.previewImage.title} />
+								<GatsbyImage
+									image={getImage(nextWork.previewImage.gatsbyImageData)}
+									alt={nextWork.previewImage.title}
+									className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out'
+								/>
 							</div>
 						</div>
 						<hr className='w-full mb-8 border-zinc-600' />
@@ -337,6 +348,9 @@ export const query = graphql`
 			location
 			date
 			liveLink
+			seoDescription {
+				seoDescription
+			}
 			workDescription {
 				workDescription
 				childMarkdownRemark {

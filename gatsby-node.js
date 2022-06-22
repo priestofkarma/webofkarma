@@ -16,6 +16,7 @@ exports.createPages = ({ graphql, actions }) => {
 						previewImage {
 							url
 							title
+							gatsbyImageData
 						}
 					}
 				}
@@ -29,6 +30,7 @@ exports.createPages = ({ graphql, actions }) => {
 						image {
 							url
 							title
+							gatsbyImageData
 						}
 					}
 				}

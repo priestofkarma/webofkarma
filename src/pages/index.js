@@ -261,10 +261,11 @@ const IndexPage = ({ data }) => {
 									>
 										<div
 											className="work-image w-full xl:max-w-xl 2xl:max-w-2xl xl:invisible xl:fixed z-10 xl:pointer-events-none">
-											<img
+											<GatsbyImage
+												image={getImage(work.previewImage.gatsbyImageData)}
+												alt={work.previewImage.title}
 												className='work-image-wrap w-full relative transition-all aspect-[8/5] xl:aspect-auto object-cover'
-												src={work.previewImage.url}
-												alt={work.previewImage.title} />
+											/>
 										</div>
 										<div className='xl:flex items-center justify-between'>
 											<h3
@@ -491,7 +492,7 @@ export const query = graphql`
 					title
 				}
 				previewImage {
-					gatsbyImageData(aspectRatio: 1.6)
+					gatsbyImageData
 					title
 					url
 				}

@@ -18,11 +18,6 @@ const Footer = ({ language }) => {
 					email
 					footerSlogan
 					node_locale
-					footerLead {
-						childMarkdownRemark {
-							html
-						}
-					}
 					image {
 						gatsbyImageData(aspectRatio: 1)
 						title

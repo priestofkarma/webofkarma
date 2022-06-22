@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/layout'
 import { useIntl } from "gatsby-plugin-intl"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
@@ -186,9 +187,11 @@ const SinglePost = ({ data, pageContext }) => {
 								className='next-post-image w-10/12 max-w-sm'
 								style={{ willChange: 'transform' }}
 							>
-								<img className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out'
-									src={nextPost.image.url}
-									alt={nextPost.image.title} />
+								<GatsbyImage
+									image={getImage(nextPost.image.gatsbyImageData)}
+									alt={nextPost.image.title}
+									className='xl:group-hover:translate-y-10 xl:translate-y-28 transition-transform duration-500 ease-in-out'
+								/>
 							</div>
 						</div>
 						<hr className='w-full mb-8 border-zinc-600' />

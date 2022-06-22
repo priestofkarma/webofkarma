@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react"
 import { graphql, Link } from 'gatsby'
 import { useIntl } from "gatsby-plugin-intl"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import gsap from 'gsap'
 import { FaAlignJustify, FaThLarge } from 'react-icons/fa'
@@ -123,7 +124,7 @@ const WorkPage = ({ data }) => {
 							className={`view-lines py-8`}>
 							<ul
 								className='flex flex-wrap md:-mx-4 2xl:-mx-10'>
-								{data.allWork.nodes.map((work, index) => {
+								{data.allWork.nodes.map((work) => {
 									const services = work.services.join(" & ");
 									const dataServices = work.services.join(' ');
 									const year = new Date(work.date).getFullYear()
@@ -136,10 +137,11 @@ const WorkPage = ({ data }) => {
 											clazzName={`${dataServices} work-item overflow-hidden md:w-1/2 md:px-4 xl:px-0 xl:w-full `}>
 											<div
 												className="work-image w-full xl:max-w-xl 2xl:max-w-2xl xl:invisible xl:fixed z-10 xl:pointer-events-none">
-												<img
+												<GatsbyImage
+													image={getImage(work.previewImage.gatsbyImageData)}
+													alt={work.previewImage.title}
 													className='work-image-wrap w-full relative transition-all aspect-[8/5] xl:aspect-auto object-cover'
-													src={work.previewImage.url}
-													alt={work.previewImage.title} />
+												/>
 											</div>
 											<div className='xl:flex items-center'>
 												<h3
@@ -173,7 +175,6 @@ const WorkPage = ({ data }) => {
 								const dataServices = work.services.join(' ');
 								const year = new Date(work.date).getFullYear()
 								const infoClasses = `text-slate-700 dark:text-zinc-300 transition-all duration-500 xl:group-hover:opacity-50 translate-z-0`
-
 								return (
 									<li key={work.id}
 										className={`${dataServices} work-item overflow-hidden md:w-1/2 md:px-4 xl:px-6`}>
@@ -182,10 +183,11 @@ const WorkPage = ({ data }) => {
 											className={`group block pb-12`}>
 											<div
 												className="w-full overflow-hidden z-10">
-												<img
+												<GatsbyImage
+													image={getImage(work.previewImage.gatsbyImageData)}
+													alt={work.previewImage.title}
 													className='w-full group-hover:scale-105 relative transition-all duration-700 aspect-[8/5] object-cover'
-													src={work.previewImage.url}
-													alt={work.previewImage.title} />
+												/>
 											</div>
 											<div className='pt-4'>
 												<h3
@@ -239,10 +241,12 @@ export const query = graphql`
 				previewImage {
 					url
 					title
+					gatsbyImageData
 				}
 				previewImageMobile {
 					url
 					title
+					gatsbyImageData
 				}
 			}
 		}

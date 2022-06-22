@@ -15,11 +15,6 @@ const LetsWork = () => {
 				nodes {
 					email
 					node_locale
-					footerLead {
-						childMarkdownRemark {
-							html
-						}
-					}
 					image {
 						gatsbyImageData(aspectRatio: 1)
 						title
