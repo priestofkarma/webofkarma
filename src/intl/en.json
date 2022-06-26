@@ -40,5 +40,6 @@
 	"all_rights": "All rights reserved",
 	"error_title": "Not found",
 	"error_text": "Sorry, there is nothing at this URL.",
-	"back_home": "Go back home"
+	"back_home": "Go back home",
+	"live_site": "Live site"
 }

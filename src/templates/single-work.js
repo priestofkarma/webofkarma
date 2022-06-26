@@ -139,7 +139,7 @@ const SingleWork = ({ data, pageContext }) => {
 									data-text-strenght={30}
 									className="magnetic button p-2 flex items-center justify-center w-32 h-32 lg:w-40 lg:h-40 rounded-full">
 									<span className='magnetic-text flex items-center'>
-										<span>Live site</span>
+										<span>{intl.formatMessage({id: "live_site"})}</span>
 										<BsArrowRightShort className='text-2xl -rotate-45' />
 									</span>
 								</a>

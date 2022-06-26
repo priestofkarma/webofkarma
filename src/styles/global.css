@@ -283,6 +283,13 @@ html {
 	-webkit-tap-highlight-color: transparent;
 }
 
+.order-1 {order: 1;}
+.order-2 {order: 2;}
+.order-3 {order: 3;}
+.order-4 {order: 4;}
+.order-5 {order: 5;}
+.order-6 {order: 6;}
+
 @keyframes leaf01 {
 	from { transform: translate(-40%, 0%); opacity: 0; }
 	70% { transform: none; opacity: 1;}

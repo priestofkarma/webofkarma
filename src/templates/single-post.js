@@ -69,15 +69,16 @@ const SinglePost = ({ data, pageContext }) => {
 
 		const headersSelector = '.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6';
 		const headers = document.querySelectorAll(headersSelector);
-		const tocLinks = document.querySelectorAll('.table-of-contents li a');
 		if (headers.length !== 0) {
 			tableOfContents({
 				headingsSelector: headersSelector,
 				wrapperSelector: '.table-of-contents'
 			});
-
+			
+			const tocLinks = document.querySelectorAll('.table-of-contents a');
 			function changeTocClass(id) {
 				tocLinks.forEach(item => {
+					console.log(id)
 					item.classList.remove('toc-active');
 					if (item.hash === `#${id}`) {
 						item.classList.add('toc-active');

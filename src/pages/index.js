@@ -250,7 +250,7 @@ const IndexPage = ({ data }) => {
 						<h2 className='h2'>{intl.formatMessage({ id: "recent_work" })}</h2>
 						<ul
 							className='flex flex-wrap md:-mx-4 xl:-mx-16 2xl:-mx-24'>
-							{data.allWork.nodes.map((work) => {
+							{data.allWork.nodes.slice(0, 4).map((work) => {
 								const services = work.services.join(" & ");
 								return (
 									<SingleWork
@@ -478,7 +478,7 @@ export const query = graphql`
 				}
 			}
 		}
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } limit: 4 sort: {fields: date, order: DESC}) {
+		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date, order: DESC}) {
 			totalCount
 			nodes {
 				id
