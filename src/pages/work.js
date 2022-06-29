@@ -5,6 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import gsap from 'gsap'
 import { FaAlignJustify, FaThLarge } from 'react-icons/fa'
+import { BsArrowRightShort } from 'react-icons/bs'
 import LetsWork from '../components/lets-work'
 import SingleWork from '../components/work-component'
 
@@ -44,25 +45,29 @@ const WorkPage = ({ data }) => {
 		})
 	}
 
-	/* filter works */
-	function handleFilter(e, service) {
+	const animState = view === 'grid' || window.innerWidth < 1279
+	
+	/* filter */
+	function filterTag(service) {
 		const filterBtns = document.querySelectorAll('.button-filter');
 		for (const btn of filterBtns) {
 			btn.classList.remove('button-active')
+			if (btn.getAttribute('data-filter') === service) {
+				btn.classList.add('button-active')
+			}
 		}
-		e.currentTarget.classList.add('button-active')
 		const workItems = document.querySelectorAll('.work-item');
 		if (service !== 'All') {
 			for (const project of workItems) {
 				if (!project.className.includes(service)) {
-					gsap.to(project, 0.45, { height: 0 })
+					animState ? gsap.to(project, 0, { display: 'none', height: 0 }) : gsap.to(project, 0.45, { height: 0 })
 				} else {
-					gsap.to(project, 0.45, { height: 'auto' })
+					animState ? gsap.to(project, 0, { display: 'block', height: 'auto' }) : gsap.to(project, 0.45, { height: 'auto' })
 				}
 			}
 		} else {
 			for (const project of workItems) {
-				gsap.to(project, 0.45, { height: 'auto' })
+				animState ? gsap.to(project, 0, { display: 'block', height: 'auto' }) : gsap.to(project, 0.45, { height: 'auto' })
 			}
 		}
 	}
@@ -70,6 +75,7 @@ const WorkPage = ({ data }) => {
 	/* change view */
 	function changeView(view) {
 		setView(() => view);
+		filterTag('All')
 	}
 
 	return (
@@ -90,7 +96,7 @@ const WorkPage = ({ data }) => {
 										data-strenght='35'
 										data-text-strenght='10'
 										data-filter={service}
-										onClick={(e) => handleFilter(e, service)}
+										onClick={() => filterTag(service)}
 									><span className='relative magnetic-text'>{service}<sup>{projectsCounter[service]}</sup></span></button>
 								)
 							})}
@@ -121,7 +127,7 @@ const WorkPage = ({ data }) => {
 							<span className='inline-block w-1/12 2xl:pr-2 text-right'>{intl.formatMessage({ id: "year" })}</span>
 						</div>
 						<div
-							className={`view-lines py-8`}>
+							className={`view-lines pt-8 pb-4`}>
 							<ul
 								className='flex flex-wrap md:-mx-4 2xl:-mx-10'>
 								{data.allWork.nodes.map((work) => {
@@ -146,17 +152,17 @@ const WorkPage = ({ data }) => {
 											<div className='xl:flex items-center'>
 												<h3
 													style={{ willChange: 'opacity, transform' }}
-													className='inline-block mb-0 w-4/12 text-2xl md:text-3xl lg:text-4xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-4 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
+													className='inline-block mb-0 w-full lg:w-4/12 text-2xl md:text-3xl lg:text-4xl pt-6 xl:pt-0 transition-all group-hover:-skew-x-12 xl:group-hover:translate-x-4 duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
 												<hr className='mt-3 mb-3 md:mb-6 xl:mb-0 xl:hidden border-zinc-400 dark:border-slate-600' />
 												<span
 													style={{ willChange: 'opacity, transform' }}
 													className={`hidden xl:inline-block w-3/12 ${infoClasses}`}>{work.location}</span>
 												<span
 													style={{ willChange: 'opacity, transform' }}
-													className={`inline-block w-8/12 xl:w-4/12 xl:text-lg ${infoClasses}`}>{services}</span>
+													className={`inline-block w-9/12 xl:w-4/12 xl:text-lg ${infoClasses}`}>{services}</span>
 												<span
 													style={{ willChange: 'opacity, transform' }}
-													className={`inline-block w-4/12 xl:w-1/12 text-right ${infoClasses}`}>{year}</span>
+													className={`inline-block w-3/12 xl:w-1/12 text-right ${infoClasses}`}>{year}</span>
 											</div>
 										</SingleWork>
 									)
@@ -192,7 +198,7 @@ const WorkPage = ({ data }) => {
 											<div className='pt-4'>
 												<h3
 													style={{ willChange: 'opacity, transform' }}
-													className='inline-block w-4/12 text-2xl md:text-3xl lg:text-4xl xl:text-5xl pt-6 xl:pt-0 transition-all duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
+													className='inline-block mb-0 w-full text-2xl md:text-3xl lg:text-4xl xl:text-5xl transition-all duration-500 xl:group-hover:opacity-50 translate-z-0'>{work.workName}</h3>
 												<hr className='mt-3 mb-3 md:mb-6 border-zinc-400 dark:border-slate-600' />
 												<span
 													style={{ willChange: 'opacity, transform' }}
@@ -207,8 +213,16 @@ const WorkPage = ({ data }) => {
 							})}
 						</ul>
 					</div>
-
-
+					<div className='flex justify-center pt-2 md:pt-8 xl:pt-14'>
+						<Link to={'/' + lang + '/archive'} className='group button-outline magnetic'
+							data-strenght='50'
+							data-text-strenght='20'>
+							<span className="magnetic-text flex">
+								<span className='relative'>{intl.formatMessage({ id: "archive" })}<sup>{data.allArchive.totalCount}</sup></span>
+								<BsArrowRightShort className='button-icon' />
+							</span>
+						</Link>
+					</div>
 				</div>
 			</section>
 
@@ -219,7 +233,13 @@ const WorkPage = ({ data }) => {
 
 export const query = graphql`
 	query WorkPageQuery($language: String) {
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } }
+		allArchive: allContentfulArchiveWork(
+			filter: {node_locale: {eq: $language}}
+			sort: {fields: date, order: DESC }) {
+			totalCount
+		}
+		allWork: allContentfulSingleWork(
+			filter: {node_locale: {eq: $language}}
 			sort: {fields: date, order: DESC }) {
 			totalCount
 			nodes {

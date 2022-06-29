@@ -16,7 +16,6 @@ const SingleWork = ({ data, pageContext }) => {
 	const {
 		workName,
 		services,
-		workDescription,
 		seoDescription,
 		credits,
 		location,
@@ -178,10 +177,6 @@ const SingleWork = ({ data, pageContext }) => {
 								</FadeInAnimation>}
 
 							</div>
-						</div>
-
-						<div className="max-w-5xl mx-auto pb-10 md:pb-16 lg:pb-28">
-							{workDescription && <div className='text-lg leading-tight max-w-xl' dangerouslySetInnerHTML={{ __html: workDescription.childMarkdownRemark.html }} />}
 						</div>
 
 						{heroImage && <div className='parallax relative overflow-hidden -mx-8 lg:mx-0' data-parallax={10}>
@@ -351,12 +346,7 @@ export const query = graphql`
 			seoDescription {
 				seoDescription
 			}
-			workDescription {
-				workDescription
-				childMarkdownRemark {
-					html
-				}
-			}
+			
 			heroImage {
 				url
 				title

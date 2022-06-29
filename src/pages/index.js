@@ -478,7 +478,9 @@ export const query = graphql`
 				}
 			}
 		}
-		allWork: allContentfulSingleWork(filter: { node_locale: { eq: $language } } sort: {fields: date, order: DESC}) {
+		allWork: allContentfulSingleWork(
+			filter: { node_locale: {eq: $language} }
+			sort: {fields: date, order: DESC}) {
 			totalCount
 			nodes {
 				id

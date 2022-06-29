@@ -78,7 +78,6 @@ const SinglePost = ({ data, pageContext }) => {
 			const tocLinks = document.querySelectorAll('.table-of-contents a');
 			function changeTocClass(id) {
 				tocLinks.forEach(item => {
-					console.log(id)
 					item.classList.remove('toc-active');
 					if (item.hash === `#${id}`) {
 						item.classList.add('toc-active');
