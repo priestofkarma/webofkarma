@@ -6,6 +6,7 @@ import { BsArrowRightShort } from 'react-icons/bs'
 import FadeInAnimation from '../components/FadeInAnimation'
 import dateFormat from '../utils/dateFormat'
 import declOfNum from '../utils/declOfNum'
+import LetsWork from '../components/lets-work'
 
 const Articles = ({ data }) => {
 	const intl = useIntl()
@@ -68,6 +69,7 @@ const Articles = ({ data }) => {
 					</div>
 				</div>
 			</div>
+			<LetsWork />
 		</Layout>
 	)
 }
