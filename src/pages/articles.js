@@ -34,7 +34,10 @@ const Articles = ({ data }) => {
 		return string.toLowerCase();
 	}
 
-	const hash = isWindow && window.location.hash;
+	let hash = "";
+	if (isWindow) {
+		hash = window.location.hash;
+	}
 	const currentCategory = hash.substring(hash.indexOf('#') + 1);
 	const categoryCounter = {};
 
