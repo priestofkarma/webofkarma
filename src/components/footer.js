@@ -1,9 +1,9 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 import { useIntl } from "gatsby-plugin-intl"
 import getLangContent from '../utils/getLangContent'
 
-const Footer = ({ language }) => {
+const Footer = () => {
 
 	const intl = useIntl()
 	const lang = intl.locale
@@ -41,6 +41,10 @@ const Footer = ({ language }) => {
 					<hr className='w-full my-6 xl:my-8 xl:mt-0 border-zinc-600' />
 					<div className="flex flex-wrap w-full justify-between flex-row text-sm sm:text-left">
 						<span className='mb-1 mr-4'>© {year} {intl.formatMessage({ id: "all_rights" })}</span>
+						<div className='flex'>
+							<Link to={`/${lang}/terms-of-use`} className="mr-4">{intl.formatMessage({ id: "terms-of-use" })}</Link>
+							<Link to={`/${lang}/privacy-policy`}>{intl.formatMessage({ id: "privacy-policy" })}</Link>
+						</div>
 						<span>{footerSlogan}</span>
 					</div>
 				</div>
