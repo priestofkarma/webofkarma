@@ -44,8 +44,9 @@ const WorkPage = ({ data }) => {
 			}
 		})
 	}
+	const isWindow = typeof window !== `undefined`;
 
-	const animState = view === 'grid' || window.innerWidth < 1279
+	const animState = view === 'grid' || (isWindow && window.innerWidth < 1279)
 	
 	/* filter */
 	function filterTag(service) {
