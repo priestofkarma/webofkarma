@@ -15,10 +15,6 @@ const LetsWork = () => {
 				nodes {
 					email
 					node_locale
-					image {
-						gatsbyImageData(aspectRatio: 1)
-						title
-					}
 				}
 			}
 		}
@@ -41,21 +37,13 @@ const LetsWork = () => {
 		});
 	}, [])
 
-	const { email, image } = data.allContentfulSiteMetadata.nodes[0]
+	const { email } = data.allContentfulSiteMetadata.nodes[0]
 	return (
 		<section className='pt-12 md:pb-6 md:pt-20 xl:pt-32 bg-zinc-900 text-zinc-200'>
 			<div className="container max-w-4xl">
 				<div ref={letsBlock}>
 					<h3 className="text-5xl md:text-7xl lg:text-8xl max-w-2xl lg:max-w-none mb-0">
-						<span className='inline-block hover:scale-150 duration-500 transition-transform'>
-							<GatsbyImage
-								style={{ width: '1em', height: '1em' }}
-								data-strenght={50}
-								className='inline-block magnetic rounded-full'
-								image={getImage(image)}
-								alt={image.title}
-								imgClassName='object-top rounded-full'
-							/></span> {intl.formatMessage({ id: "contact_lead" })}</h3>
+						{intl.formatMessage({ id: "contact_lead" })}</h3>
 
 					<div className='relative py-24 sm:pb-16 lg:pt-28'>
 						<hr className='w-full border-zinc-600' />
