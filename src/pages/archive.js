@@ -9,7 +9,7 @@ import { BsFillArrowUpRightCircleFill } from 'react-icons/bs'
 
 const ArchivePage = ({ data }) => {
 	const intl = useIntl()
-	const lang = intl.locale
+	// const lang = intl.locale
 	const { seoTitle, seoDescription, seoImage } = data.allContentfulArchivePage.nodes[0]
 	const seo = {
 		title: seoTitle,

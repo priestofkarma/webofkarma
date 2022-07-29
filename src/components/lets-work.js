@@ -3,7 +3,6 @@ import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { useIntl } from "gatsby-plugin-intl"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { BsArrowRightShort } from 'react-icons/bs'
 
 const LetsWork = () => {
