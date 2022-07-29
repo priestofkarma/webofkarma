@@ -16,7 +16,7 @@ const SinglePost = ({ data, pageContext }) => {
 	const tocRef = useRef();
 	const asideRef = useRef();
 	const postContentRef = useRef();
-	const { title, image, description, contentMd, date } = data.contentfulBlogPost
+	const { title, image, description, contentMd, date, category } = data.contentfulArticle
 	const seo = {
 		title: title,
 		description: description.description,
@@ -74,7 +74,7 @@ const SinglePost = ({ data, pageContext }) => {
 				headingsSelector: headersSelector,
 				wrapperSelector: '.table-of-contents'
 			});
-			
+
 			const tocLinks = document.querySelectorAll('.table-of-contents a');
 			function changeTocClass(id) {
 				tocLinks.forEach(item => {
@@ -145,14 +145,36 @@ const SinglePost = ({ data, pageContext }) => {
 	const enRead = `${lang === 'en' ? formated.enDate : formated.ukDate} • ${timeToRead} min read`
 	const ukRead = `${lang === 'en' ? formated.enDate : formated.ukDate} • читати ${timeToRead} ${declOfNum(timeToRead, ['хвилину', 'хвилини', 'хвилин'])}`
 
+	const currCat = (category) => {
+		let string = "";
+		for (let i = 0; i < category.length; i++) {
+			if (category[i] === " ") {
+				string += "-";
+			} else {
+				string += category[i];
+			}
+		}
+		return string.toLowerCase();
+	}
+
 	return (
 		<Layout seo={seo}>
-			<div className='overflow-hidden dark:text-slate-200 lg:overflow-initial pb-10 md:pb-16 lg:pb-28 bg-gray-50 dark:bg-slate-900'>
-				<div className='relative pt-32 lg:pt-48 pb-10 bg-slate-200 dark:bg-slate-800'>
+			<div className='overflow-hidden dark:text-zinc-200 lg:overflow-initial pb-10 md:pb-16 lg:pb-28 bg-gray-50 dark:bg-zinc-800'>
+				<div className='relative pt-32 lg:pt-48 pb-10 bg-slate-200 dark:bg-zinc-700'>
 					<div className="container px-6 xl:px-20">
 						<div className='relative lg:w-9/12 xl:w-8/12'>
 							<h1 className='h1 text-black dark:text-white mb-2 xl:mb-4 text-2xl xl:text-5xl font-medium'>{title}</h1>
-							<span className='text-slate-600 dark:text-slate-400'>{lang === 'en' ? enRead : ukRead}</span>
+							<div className='mb-4'><span className='text-zinc-600 dark:text-zinc-400'>{lang === 'en' ? enRead : ukRead}</span></div>
+							<div className='flex'>{category.map((cat, index) => {
+								return (
+									<Link
+										to={`/${lang}/articles#${currCat(cat)}`}
+										key={`category-${index}`}
+										className='bg-slate-300 dark:bg-zinc-500  dark:text-white relative mr-3 mb-3 py-1 px-3 rounded-md group hover:scale-110 transition-all'>
+										{intl.formatMessage({ id: cat })}
+									</Link>
+								)
+							})}</div>
 						</div>
 					</div>
 				</div>
@@ -164,7 +186,7 @@ const SinglePost = ({ data, pageContext }) => {
 							className='toc hidden lg:block text-lg w-full lg:w-3/12 xl:w-4/12 pl-16 relative'>
 							<div className='sticky top-20 pl-6 overflow-y-auto' style={{ maxHeight: '75vh' }}>
 								<span className='block text-zinc-400 text-xs lg:text-sm xl:text-base 2xl:text-lg mb-4'>{intl.formatMessage({ id: "toc" })}</span>
-								<div ref={tocRef} className='text-base 2xl:text-lg text-slate-700 dark:text-white/70 !leading-snug'>
+								<div ref={tocRef} className='text-base 2xl:text-lg text-zinc-700 dark:text-white/70 !leading-snug'>
 									<ul className='table-of-contents'></ul>
 								</div>
 							</div>
@@ -174,7 +196,7 @@ const SinglePost = ({ data, pageContext }) => {
 			</div>
 
 			{/* next post */}
-			<div className='bg-gradient-to-b dark:from-slate-900 dark:to-zinc-900 from-slate-300 to-slate-400 text-black dark:text-white text-center pt-10 pb-4 md:pt-16 md:pb-8 xl:pt-24'>
+			<div className='bg-gradient-to-b dark:from-zinc-800 dark:to-zinc-900 from-zinc-300 to-zinc-400 text-black dark:text-white text-center pt-10 pb-4 md:pt-16 md:pb-8 xl:pt-24'>
 				<div className="container">
 					<Link className='group max-w-screen-sm mx-auto relative block'
 						to={'/' + lang + '/articles/' + nextPost.path}>
@@ -200,7 +222,7 @@ const SinglePost = ({ data, pageContext }) => {
 						className='magnetic button-outline border-zinc-600 justify-center w-full sm:w-auto'>
 						<span className='magnetic-text relative flex'>
 							{intl.formatMessage({ id: "all_posts" })}
-							<sup>{data.allContentfulBlogPost.totalCount / 2}</sup>
+							<sup>{data.allContentfulArticle.totalCount / 2}</sup>
 						</span>
 					</Link>
 				</div>
@@ -210,11 +232,11 @@ const SinglePost = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-	query singleBlogPostQuery($slug: String, $language: String) {
-		allContentfulBlogPost {
+	query singleArticleQuery($slug: String, $language: String) {
+		allContentfulArticle {
 			totalCount
 		}
-		contentfulBlogPost(path: {eq: $slug}, node_locale: {eq: $language}) {
+		contentfulArticle(path: {eq: $slug}, node_locale: {eq: $language}) {
 			id
 			node_locale
 			date
@@ -226,6 +248,7 @@ export const query = graphql`
 				url
 				title
 			}
+			category
 			contentMd {
 				childMarkdownRemark {
 					html

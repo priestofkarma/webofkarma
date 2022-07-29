@@ -14,12 +14,13 @@
 		}
 	
 		::-webkit-scrollbar-track {
-			@apply bg-zinc-100 dark:bg-zinc-900
+			@apply bg-zinc-50/0 dark:bg-zinc-900
 		}
 	
 		::-webkit-scrollbar-thumb {
-			@apply bg-zinc-700 rounded-lg border border-zinc-100 dark:bg-zinc-800 dark:border-zinc-900
+			@apply bg-zinc-300 rounded-lg border border-zinc-100 dark:bg-zinc-800 dark:border-zinc-900
 		}
+	
 	}
 
 	.overflow-initial {
@@ -301,6 +302,7 @@ html {
 	70% { transform: none; opacity: 1;}
 	to { transform: none; opacity: 1;}
 }
+
 @keyframes leaf03 {
 	from { transform: translate(0%, -40%); opacity: 0; }
 	70% { transform: none; opacity: 1;}
@@ -660,6 +662,10 @@ sup {
 
 .post-content ul {
 	list-style-type: initial;
+}
+
+.post-content li {
+	margin-bottom: 0.8em;
 }
 
 .post-content ol {

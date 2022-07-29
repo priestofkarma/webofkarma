@@ -22,11 +22,18 @@ module.exports = {
 		"gatsby-plugin-postcss",
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
-		"gatsby-plugin-sitemap", {
+		"gatsby-plugin-sitemap",
+		{
 			resolve: 'gatsby-plugin-manifest',
 			options: {
-				"icon": "src/images/icon.png"
+				name: `Webofkarma`,
+				short_name: `Webofkarma`,
+				start_url: `/`,
+				"icon": "src/images/icon.png",
 			}
+		},
+		{
+			resolve: "gatsby-plugin-offline",
 		},
 		{
 			resolve: `gatsby-transformer-remark`,
@@ -54,7 +61,7 @@ module.exports = {
 								default: 'GitHub Light Default',
 								parentSelector: {
 									'html.light': 'GitHub Light Default',
-									'html.dark': 'Solarized Dark'
+									'html.dark': 'GitHub Dark'
 								}
 							},
 							extensions: ['github-vscode-theme'],
@@ -62,7 +69,7 @@ module.exports = {
 								marker: '-',
 								theme: {
 									default: 'GitHub Light Default',
-									dark: 'Solarized Dark'
+									dark: 'GitHub Dark'
 								}
 							},
 						}

@@ -21,7 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
 					}
 				}
 			}
-			allContentfulBlogPost {
+			allContentfulArticle {
 				edges {
 					node {
 						id
@@ -59,8 +59,8 @@ exports.createPages = ({ graphql, actions }) => {
 			})
 		})
 		
-		result.data.allContentfulBlogPost.edges.forEach((edge, index) => {
-			const posts = result.data.allContentfulBlogPost.edges;
+		result.data.allContentfulArticle.edges.forEach((edge, index) => {
+			const posts = result.data.allContentfulArticle.edges;
 			const pagePath = edge.node.path
 			const prev = index === 0 ? null : posts[index - 1];
 			const next = index === posts.length - 1 ? null : posts[index + 1];

@@ -20,8 +20,8 @@ const IndexPage = ({ data }) => {
 	const intl = useIntl()
 	const lang = intl.locale
 	const social = getSocialItems(data.allContentfulSocialLinks.nodes[0])
-	const lastPost = data.allContentfulBlogPost.nodes[0]
-	const posts = data.allContentfulBlogPost.nodes
+	const lastPost = data.allContentfulArticle.nodes[0]
+	const posts = data.allContentfulArticle.nodes
 
 	const {
 		homepageTitle,
@@ -44,7 +44,11 @@ const IndexPage = ({ data }) => {
 	gsap.registerPlugin(ScrollToPlugin);
 	gsap.registerPlugin(ScrollTrigger)
 	function scrollDown() {
-		gsap.to(window, { duration: 1, scrollTo: secondBlockRef.current, ease: 'power4.out' });
+		gsap.to(window, {
+			duration: 1,
+			scrollTo: secondBlockRef.current,
+			ease: 'power4.out'
+		});
 	}
 
 	useEffect(() => {
@@ -304,7 +308,7 @@ const IndexPage = ({ data }) => {
 					<div className="flex last-work-grid" style={{ willChange: 'transform' }}>
 						{imagesGrid.map((item, index) => {
 							return (
-								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3 aspect-[5/3]`}>
+								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3 aspect-[8/5]`}>
 									{item.gatsbyImageData ?
 										<GatsbyImage
 											className='item-loading w-full h-full relative transition-all'
@@ -324,7 +328,7 @@ const IndexPage = ({ data }) => {
 					<div className="flex last-work-grid-second" style={{ willChange: 'transform' }}>
 						{imagesSecondGrid.map((item, index) => {
 							return (
-								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3 aspect-[5/3]`}>
+								<div key={item.id} className={`${index === 0 ? 'hidden lg:block' : ''} p-2 md:p-3 lg:p-4 w-1/3 aspect-[8/5]`}>
 									{item.gatsbyImageData ?
 										<GatsbyImage
 											className='item-loading w-full h-full relative transition-all'
@@ -359,7 +363,7 @@ const IndexPage = ({ data }) => {
 										delayFrom={768}
 										key={item.id}
 										className='block w-full md:w-1/2 mb-8 md:mb-12 px-4'>
-										<article className='relative overflow-hidden p-4 lg:p-6 xl:p-8 bg-white dark:shadow-md dark:bg-gray-800 h-full rounded-md lg:rounded-lg'>
+										<article className='relative overflow-hidden p-4 lg:p-6 xl:p-8 bg-white dark:shadow-md dark:bg-slate-800 h-full rounded-md lg:rounded-lg'>
 											<Link className='group' to={`/${lang}/articles/${item.path}`}>
 												<div className='flex items-center text-sm md:text-base text-zinc-500 dark:text-zinc-400'>
 													<span>{lang === 'en' ? enRead : ukRead}</span>
@@ -382,7 +386,7 @@ const IndexPage = ({ data }) => {
 								data-strenght='50'
 								data-text-strenght='20'>
 								<span className="magnetic-text flex">
-									<span className='relative'>{intl.formatMessage({ id: "more_articles" })}<sup>{data.allContentfulBlogPost.totalCount}</sup></span>
+									<span className='relative'>{intl.formatMessage({ id: "more_articles" })}<sup>{data.allContentfulArticle.totalCount}</sup></span>
 									<BsArrowRightShort className='button-icon' />
 								</span>
 							</Link>
@@ -407,7 +411,7 @@ export const query = graphql`
 				facebookLink
 			}
 		}
-		allContentfulBlogPost(
+		allContentfulArticle(
 			filter: {node_locale: {eq: $language}} 
 			limit: 2
 			sort: {order: DESC, fields: date}

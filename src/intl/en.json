@@ -42,5 +42,15 @@
 	"error_title": "Not found",
 	"error_text": "Sorry, there is nothing at this URL.",
 	"back_home": "Go back home",
-	"live_site": "Live site"
+	"live_site": "Live site",
+	"category": "Category",
+	"Animation": "Animation",
+	"CSS": "CSS",
+	"Gatsby": "Gatsby",
+	"JavaScript": "JavaScript",
+	"React": "React",
+	"Use cases": "Use cases",
+	"Tips and Tricks": "Tips and Tricks",
+	"Performance": "Performance",
+	"all_tags": "All tags"
 }

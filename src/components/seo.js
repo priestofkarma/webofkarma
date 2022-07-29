@@ -36,7 +36,7 @@ const Seo = ({ theme, seo }) => {
 		<Helmet
 			htmlAttributes={{
 				lang,
-				class: theme
+				class: theme 
 			}}
 			title={title}
 			titleTemplate={concatTitle}

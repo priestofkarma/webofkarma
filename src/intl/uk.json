@@ -33,7 +33,7 @@
 	"send": "Відправити",
 	"next_case": "Наступна робота",
 	"next_post": "Наступна стаття",
-	"read_more": "Читати більше",
+	"read_more": "Читати далі",
 	"articles": "Статті",
 	"archive": "Архів",
 	"toc": "Зміст",
@@ -42,5 +42,15 @@
 	"error_title": "Не знайдено",
 	"error_text": "На жаль, на цій URL-адресі немає нічого.",
 	"back_home": "На головну",
-	"live_site": "Сайт"
+	"live_site": "Сайт",
+	"category": "Категорія",
+	"Animation": "Анімація",
+	"CSS": "CSS",
+	"Gatsby": "Gatsby",
+	"JavaScript": "JavaScript",
+	"React": "React",
+	"Use cases": "Приклади",
+	"Tips and Tricks": "Фішечки",
+	"Performance": "Продуктивність",
+	"all_tags": "Всі теги"
 }

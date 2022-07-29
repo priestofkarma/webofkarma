@@ -21,7 +21,7 @@ const Header = ({ social, onToggleTheme, theme }) => {
 			allContentfulSingleWork {
 				totalCount
 			}
-			allContentfulBlogPost {
+			allContentfulArticle {
 				totalCount
 			}
 		}
@@ -60,7 +60,7 @@ const Header = ({ social, onToggleTheme, theme }) => {
 	/* Navigation */
 	const navLinks = [
 		{ href: `/work`, label: 'works', count: data.allContentfulSingleWork.totalCount / 2 },
-		{ href: `/articles`, label: 'articles', count: data.allContentfulBlogPost.totalCount / 2 },
+		{ href: `/articles`, label: 'articles', count: data.allContentfulArticle.totalCount / 2 },
 		{ href: `/articles/library`, label: 'library' },
 		{ href: `/about`, label: 'about' },
 		{ href: `/contact`, label: 'contact' },
