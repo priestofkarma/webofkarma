@@ -12,6 +12,7 @@ const Articles = ({ data }) => {
 	const lang = intl.locale
 	const posts = data.allContentfulArticle.nodes
 	const { pageTitle, seoTitle, seoDescription, seoImage } = data.allContentfulBlogPage.nodes[0]
+	const isWindow = typeof window !== `undefined`;
 	const seo = {
 		title: seoTitle,
 		description: seoDescription.seoDescription,
@@ -33,7 +34,7 @@ const Articles = ({ data }) => {
 		return string.toLowerCase();
 	}
 
-	const hash = window.location.hash;
+	const hash = isWindow && window.location.hash;
 	const currentCategory = hash.substring(hash.indexOf('#') + 1);
 	const categoryCounter = {};
 
