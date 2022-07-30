@@ -334,6 +334,7 @@ html {
 	}
 }
 
+
 .fake-menu-btn {
 	transition: 0.7s transform 0.5s var(--elastic-ease);
 }
@@ -1142,6 +1143,12 @@ mark {
 	}
 }
 
+
+@media (max-width: 400px) {
+	.hero-title {
+		font-size: 2.45rem;
+	}
+}
 
 @media (max-width: 360px) {
 	.container {

@@ -100,7 +100,7 @@ const IndexPage = ({ data }) => {
 								<BsArrowRightShort className='button-icon' />
 							</Link>
 
-							<h1 key='heroTitle' className='text-gradient-animation bg-gradient-to-r from-cobalt-400 to-purple-500 text-5xl sm:text-5xl xl:text-6xl 2xl:text-7xl mb-6 xl:mb-8 font-bold'>
+							<h1 key='heroTitle' className='hero-title text-gradient-animation bg-gradient-to-r from-cobalt-400 to-purple-500 text-5xl sm:text-5xl xl:text-6xl 2xl:text-7xl mb-6 xl:mb-8 font-bold'>
 								{heroTitle}
 							</h1>
 							<div
