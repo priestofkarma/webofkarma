@@ -92,7 +92,7 @@ const IndexPage = ({ data }) => {
 
 							<Link
 								to={`/${lang}/articles/${lastPost.path}`}
-								className="mb-8 group inline-flex items-center leading-none text-sm p-3 -mx-3 pr-4 bg-gray-50/10 hover:bg-gray-100/90 border dark:border-none dark:bg-gray-500/10 dark:hover:bg-gray-200/10 rounded-full backdrop-blur-sm transition-colors duration-500 cursor-pointer">
+								className="mb-4 md:mb-8 group inline-flex items-center leading-none text-sm p-3 -mx-3 pr-4 bg-gray-50/10 hover:bg-gray-100/90 border dark:border-none dark:bg-gray-500/10 dark:hover:bg-gray-200/10 rounded-full backdrop-blur-sm transition-colors duration-500 cursor-pointer">
 								<span className='bg-green-400 py-2 px-2.5 mr-3 text-center shrink-0 inline-block text-black uppercase rounded-full text-xs leading-none'>
 									{intl.formatMessage({ id: "post" })}
 								</span>
@@ -100,17 +100,17 @@ const IndexPage = ({ data }) => {
 								<BsArrowRightShort className='button-icon' />
 							</Link>
 
-							<h1 key='heroTitle' className='text-gradient-animation bg-gradient-to-r from-cobalt-400 to-purple-500 text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl mb-6 xl:mb-8 font-bold'>
+							<h1 key='heroTitle' className='text-gradient-animation bg-gradient-to-r from-cobalt-400 to-purple-500 text-5xl sm:text-5xl xl:text-6xl 2xl:text-7xl mb-6 xl:mb-8 font-bold'>
 								{heroTitle}
 							</h1>
 							<div
-								className='text-md sm:text-lg lg:text-xl xl:w-9/12 leading-normal text-gray-700 dark:text-zinc-300'
+								className='text-lg sm:text-lg lg:text-xl xl:w-9/12 leading-normal text-gray-700 dark:text-zinc-300'
 								dangerouslySetInnerHTML={{ __html: heroSubtitle.childMarkdownRemark.html }}></div>
 							<Link
 								to={'/' + lang + '/contact'}
 								data-strenght={50}
 								data-text-strenght={30}
-								className="group button magnetic mt-12">
+								className="group button magnetic mt-6 md:mt-12">
 								<span className="magnetic-text flex">
 									<span>{intl.formatMessage({ id: "get_in_touch" })}</span>
 									<BsArrowRightShort className='button-icon' />
@@ -345,7 +345,7 @@ const IndexPage = ({ data }) => {
 				</div>
 			</div>
 
-			<div className='py-6 pb-10 lg:py-16 lg:pb-20'>
+			<div className='py-6 pb-10 lg:py-16 lg:pb-20 overflow-hidden'>
 				<div className='container max-w-screen-lg'>
 					<div className='relative'>
 						<h2 className='h2 mb-10'>{intl.formatMessage({ id: "recent_articles" })}</h2>

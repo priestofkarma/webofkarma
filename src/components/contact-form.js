@@ -170,7 +170,7 @@ const ContactForm = ({data}) => {
 				className='magnetic relative button w-32 h-32 md:w-40 md:h-40 flex items-center justify-center text-lg self-end -mt-4 lg:-mt-10'
 				type='submit'
 				disabled={serverState.submitting}>
-				<span className='magnetic-text'>{intl.formatMessage({ id: "send" })}</span>
+				<span className='magnetic-text font-normal'>{intl.formatMessage({ id: "send" })}</span>
 			</button>
 
 			<span className='inline-block mt-6  text-xl'>{serverState.status && serverState.status.msg}</span>

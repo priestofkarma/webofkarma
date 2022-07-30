@@ -4,24 +4,13 @@
 
 ## 🚀 Quick start
 
-0.  **Create a theme site.**
-
- 	```shell
-    # Install packages (maybe gatsby-plugin-intl need install with --legacy-peer-deps)
-    npm run theme
-    ```
-
-	https://www.npmjs.com/package/github-vscode-theme
-	
-	https://github.com/andrewbranch/gatsby-remark-vscode#using-languages-and-themes-from-an-extension
-
 1.  **Create a Gatsby site.**
 
     Use the Gatsby CLI to create a new site, specifying the minimal starter.
 
     ```shell
-    # Install packages (maybe gatsby-plugin-intl need install with --legacy-peer-deps)
-    npm install
+    # Install packages (gatsby-plugin-intl need install with --legacy-peer-deps)
+    npm install --legacy-peer-deps
     ```
 
 	If Error: Something went wrong installing the "sharp" module
@@ -38,6 +27,7 @@
 	```
 		CONTENTFUL_SPACE_ID=YOUR_SPACE_ID
 		CONTENTFUL_ACCESS_TOKEN=YOUR_ACCESS_TOKEN
+		GATSBY_CONTACT_FORM=YOUR_ACCESS_TOKEN
 	```
 
 3.  **Start developing.**
@@ -46,6 +36,8 @@
 
     ```shell
     npm run develop
+	// or
+	gatsby develop
     ```
 
 4.  **Open the code and start customizing!**

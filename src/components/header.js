@@ -42,9 +42,9 @@ const Header = ({ social, onToggleTheme, theme }) => {
 		tlRef.current = gsap.timeline({ paused: true })
 			.to(menuRef.current, { x: 0, duration: 0.8, ease: "power4.inOut" })
 			.from(menuRef.current.querySelectorAll('.menu__item'),
-				{ xPercent: 40, duration: 0.8, stagger: 0.05, ease: "power4.inOut" }, '-=0.75')
+				{ xPercent: 60, opacity: 0, duration: 0.8, stagger: 0.05, ease: "power4.inOut" }, '-=90%')
 			.from(menuRef.current.querySelectorAll('.header__nav a'),
-				{ x: 50, duration: 1, stagger: 0.05, ease: "power4.inOut" }, '<')
+				{ x: 60, opacity: 0, duration: 1, stagger: 0.05, ease: "power4.inOut" }, '<')
 
 		ScrollTrigger.create({
 			start: 'top -30%',
@@ -86,7 +86,7 @@ const Header = ({ social, onToggleTheme, theme }) => {
 					ref={menuRef}>
 
 					<div className="menu__container relative overflow-y-auto overflow-x-hidden h-full">
-						<div className=" min-h-full px-8 pt-20 pb-10 sm:px-20 flex flex-col">
+						<div className="min-h-full px-8 pt-20 pb-20 sm:px-20 flex flex-col">
 
 							<div className="menu__item mt-auto mb-4">
 								<h5 className='text-zinc-400 text-xs md:text-sm'>{intl.formatMessage({ id: "navigation" })}</h5>

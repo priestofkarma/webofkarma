@@ -9,7 +9,6 @@
   ],
   "scripts": {
 	"postinstall": "cd ./node_modules/github-vscode-theme && npm i && npm run build",
-    "theme": "cd ./node_modules/github-vscode-theme && npm i && npm run build",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",

@@ -196,7 +196,7 @@ const SinglePost = ({ data, pageContext }) => {
 			</div>
 
 			{/* next post */}
-			<div className='bg-gradient-to-b dark:from-zinc-800 dark:to-zinc-900 from-zinc-300 to-zinc-400 text-black dark:text-white text-center pt-10 pb-4 md:pt-16 md:pb-8 xl:pt-24'>
+			<div className='bg-gradient-to-b dark:from-zinc-800 dark:to-zinc-900 from-zinc-300 to-zinc-400 text-black dark:text-white text-center py-10 md:py-16 xl:pt-24'>
 				<div className="container">
 					<Link className='group max-w-screen-sm mx-auto relative block'
 						to={'/' + lang + '/articles/' + nextPost.path}>

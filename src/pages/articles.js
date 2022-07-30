@@ -77,7 +77,7 @@ const Articles = ({ data }) => {
 						<div className='flex flex-wrap mb-6'>
 							<Link
 								to={`/${lang}/articles`}
-								className={`${!!currentCategory === false ? 'bg-cobalt-400 dark:bg-cobalt-500 text-cobalt-50 ' : 'bg-slate-200 dark:bg-zinc-600 dark:text-white'} mr-5 mb-3 py-1 px-3 rounded-md group hover:scale-110 transition-all`}>
+								className={`${!!currentCategory === false ? 'bg-cobalt-400 dark:bg-cobalt-500 text-cobalt-50 ' : 'bg-slate-200 dark:bg-zinc-600 dark:text-white'} mr-5 mb-5 py-1 px-3 rounded-md group hover:scale-110 transition-all`}>
 								<span className='inline-block transition-transform'>{intl.formatMessage({ id: "all_tags" })}</span>
 							</Link>
 							{categoriesList().map((cat, index) => {
@@ -85,7 +85,7 @@ const Articles = ({ data }) => {
 									<Link
 										to={`/${lang}/articles#${currCat(cat)}`}
 										key={`categorys-${index}`}
-										className={`${currentCategory === currCat(cat) ? 'bg-cobalt-400 dark:bg-cobalt-500 text-cobalt-50' : 'bg-slate-200 dark:bg-zinc-600  dark:text-white'} relative mr-5 mb-3 py-1 px-3 rounded-md group hover:scale-110 transition-all`}>
+										className={`${currentCategory === currCat(cat) ? 'bg-cobalt-400 dark:bg-cobalt-500 text-cobalt-50' : 'bg-slate-200 dark:bg-zinc-600  dark:text-white'} relative mr-5 mb-5 py-1 px-3 rounded-md group hover:scale-110 transition-all`}>
 										<span className='inline-block'>
 											{intl.formatMessage({ id: cat })}
 											<sup className={`flex w-6 h-6 border border-slate-100  dark:border-zinc-800 rounded-full -right-3 left-auto -top-3 ${currentCategory === currCat(cat) ? 'bg-cobalt-400 text-cobalt-50' : 'bg-slate-200 dark:bg-zinc-600  dark:text-white'} opacity-100`}>
