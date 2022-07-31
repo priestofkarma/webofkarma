@@ -3,9 +3,11 @@ import { GoMarkGithub } from 'react-icons/go'
 import { FaFacebook } from 'react-icons/fa'
 import { FaTelegram } from 'react-icons/fa'
 import { RiInstagramFill } from 'react-icons/ri'
+import { IoLogoTwitter } from 'react-icons/io'
+import { SiCodepen } from 'react-icons/si'
 
 export default function getSocialItems(data) {
-	const { telegramLink, instagramLink, githubLink, facebookLink } = data;
+	const { telegramLink, instagramLink, githubLink, facebookLink, codepenLink, twitterLink } = data;
 	const links = [
 		{
 			icon: <FaTelegram />,
@@ -26,6 +28,16 @@ export default function getSocialItems(data) {
 			icon: <FaFacebook />,
 			url: facebookLink,
 			name: "Facebook",
+		},
+		{
+			icon: <SiCodepen />,
+			url: codepenLink,
+			name: "Codepen",
+		},
+		{
+			icon: <IoLogoTwitter />,
+			url: twitterLink,
+			name: "Twitter",
 		},
 	];
 	return links

@@ -23,6 +23,8 @@ const Layout = ({ children, seo }) => {
 					instagramLink
 					githubLink
 					facebookLink
+					codepenLink
+					twitterLink
 					node_locale
 				}
 			}

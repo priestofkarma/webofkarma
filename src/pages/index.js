@@ -86,7 +86,7 @@ const IndexPage = ({ data }) => {
 				}}>
 
 				<div className="container">
-					<div className="hero__inner relative pt-24 lg:pt-32 pb-16 lg:pb-16 flex flex-col md:flex-row">
+					<div className="hero__inner relative pt-24 lg:pt-32 pb-24 lg:pb-16 flex flex-col md:flex-row">
 
 						<div className='md:w-8/12 lg:w-1/2 xl:w-5/12 xl:max-w-screen-sm 2xl:max-w-screen-md'>
 
@@ -157,19 +157,12 @@ const IndexPage = ({ data }) => {
 										)
 									})}
 							</div>
-							<div className='md:hidden relative -mb-3'>
-								<button
-									onClick={scrollDown}
-									className="group inline-flex items-center py-3.5 px-7 mt-10 -ml-7">
-									<BsArrowDown className='animate-bounce text-3xl ml-0 mr-3' />
-									<span>{intl.formatMessage({ id: "scroll_down" })}</span>
-								</button>
-							</div>
+							
 						</div>
 					</div>
 				</div>
 
-				<div className="absolute right-4 bottom-16 sm:right-10  lg:right-12 lg:bottom-16 flex flex-row md:flex-row xl:flex-col">
+				<div className="absolute right-4 bottom-6 sm:right-10  lg:right-12 lg:bottom-16 flex flex-row md:flex-row xl:flex-col">
 					{social.map((item, index) => (
 						<a
 							href={item.url}
@@ -409,6 +402,8 @@ export const query = graphql`
 				instagramLink
 				githubLink
 				facebookLink
+				codepenLink
+				twitterLink
 			}
 		}
 		allContentfulArticle(

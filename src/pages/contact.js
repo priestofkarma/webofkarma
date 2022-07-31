@@ -74,6 +74,8 @@ export const query = graphql`
 				instagramLink
 				githubLink
 				facebookLink
+				codepenLink
+				twitterLink
 			}
 		}
 		allContentfulSiteMetadata(filter: {node_locale: {eq: $language}}) {
