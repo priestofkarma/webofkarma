@@ -41,10 +41,10 @@ const Footer = () => {
 					<hr className='w-full my-6 xl:my-8 xl:mt-0 border-zinc-600' />
 					<div className="flex flex-wrap w-full justify-between flex-row text-sm sm:text-left">
 						<span className='mb-1 mr-4'>© {year} {intl.formatMessage({ id: "all_rights" })}</span>
-						<div className='flex'>
+						{/* <div className='flex'>
 							<Link to={`/${lang}/terms-of-use`} className="mr-4">{intl.formatMessage({ id: "terms-of-use" })}</Link>
 							<Link to={`/${lang}/privacy-policy`}>{intl.formatMessage({ id: "privacy-policy" })}</Link>
-						</div>
+						</div> */}
 						<span>{footerSlogan}</span>
 					</div>
 				</div>
