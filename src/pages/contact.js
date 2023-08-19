@@ -70,10 +70,7 @@ export const query = graphql`
 	query ContactPageQuery($language: String) {
 		allContentfulSocialLinks(filter: {node_locale: {eq: $language}}) {
 			nodes {
-				// telegramLink
-				// instagramLink
 				githubLink
-				// facebookLink
 				codepenLink
 				twitterLink
 			}
