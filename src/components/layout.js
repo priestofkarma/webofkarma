@@ -19,10 +19,7 @@ const Layout = ({ children, seo }) => {
 			allContentfulSocialLinks {
 				nodes {
 					socialTitle
-					telegramLink
-					instagramLink
 					githubLink
-					facebookLink
 					codepenLink
 					twitterLink
 					node_locale
