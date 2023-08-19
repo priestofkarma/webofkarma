@@ -9,7 +9,7 @@ import { SiCodepen } from 'react-icons/si'
 export default function getSocialItems(data) {
 	const { telegramLink, instagramLink, githubLink, facebookLink, codepenLink, twitterLink } = data;
 	const links = [
-		{
+		/* {
 			icon: <FaTelegram />,
 			url: telegramLink,
 			name: "Telegram",
@@ -18,17 +18,17 @@ export default function getSocialItems(data) {
 			icon: <RiInstagramFill />,
 			url: instagramLink,
 			name: "Instagram",
-		},
+		}, */
 		{
 			icon: <GoMarkGithub />,
 			url: githubLink,
 			name: "GitHub",
 		},
-		{
+		/* {
 			icon: <FaFacebook />,
 			url: facebookLink,
 			name: "Facebook",
-		},
+		}, */
 		{
 			icon: <SiCodepen />,
 			url: codepenLink,
